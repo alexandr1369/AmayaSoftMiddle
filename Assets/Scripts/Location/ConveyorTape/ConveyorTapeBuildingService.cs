@@ -46,7 +46,7 @@ namespace Location.ConveyorTape
             SpawnTapeSide(tapeSidePrefab, transform, startPoint, Quaternion.Euler(0, 180f, 0));
             SpawnTapeSide(tapeSidePrefab, transform, endPoint, Quaternion.identity);
             
-            _conveyorTape.Init(startPoint);
+            _conveyorTape.Init(endPoint);
         }
 
         private static void SpawnTapePart(

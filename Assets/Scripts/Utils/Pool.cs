@@ -33,6 +33,7 @@ namespace Utils
         public void Despawn(T item)
         {
             Items.Add(item);
+            item.transform.parent = transform;
             item.gameObject.SetActive(false);
         }
     }

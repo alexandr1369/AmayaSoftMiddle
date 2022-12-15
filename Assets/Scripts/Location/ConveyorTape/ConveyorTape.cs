@@ -1,7 +1,10 @@
+using System;
+using System.Collections.Generic;
 using GameItemSystem;
 using Location.ConveyorTape.Item;
 using UnityEngine;
 using Zenject;
+using Random = UnityEngine.Random;
 
 namespace Location.ConveyorTape
 {
@@ -13,6 +16,7 @@ namespace Location.ConveyorTape
         private Utils.IFactory<ConveyorTapeItem> _factory;
         private Vector3 _startPoint;
         private float _spawningDelay;
+        private int _currentIncorrectAnswersInARow;
         private bool _isActive;
 
         [Inject]
@@ -23,6 +27,14 @@ namespace Location.ConveyorTape
         }
 
         public void Init(Vector3 startPoint) => _startPoint = startPoint;
+        
+        // TODO: вынести в ладинг операцию
+        public void StartConveyorTape() => _isActive = true;
+
+        public void StopConveyorTape() => _isActive = false;
+        
+        // TODO: remove
+        private void Start() => StartConveyorTape();
 
         private void Update() => ContinueConveyorTape();
 
@@ -45,13 +57,14 @@ namespace Location.ConveyorTape
             var item = _factory.Create();
             item.transform.position = _startPoint;
             
-            // // TODO: нельзя создавать одинаковые на сцене объекты - чек где??
-            // item.Init();
+            // TODO: нельзя создавать одинаковые желония для персонажей - чек где??
+            
+            // TODO: счетчик на неправильные спавны объектов хранить
+            
+            var letterItems = _gameItems.GetAssets<LetterItem>();
+            var randomLetter = letterItems[Random.Range(0, letterItems.Count)];
+            item.Init(randomLetter);
+            item.SetVelocity(Config.TapeVelocity);
         }
-
-        // TODO: вынести в ладинг операцию
-        public void StartConveyorTape() => _isActive = true;
-
-        public void StopConveyorTape() => _isActive = false;
     }
 }

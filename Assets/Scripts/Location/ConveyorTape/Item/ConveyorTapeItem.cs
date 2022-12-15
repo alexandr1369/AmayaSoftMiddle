@@ -11,11 +11,22 @@ namespace Location.ConveyorTape.Item
         [field: SerializeField] private SpriteRenderer Renderer { get; set; }
         
         private LetterItem _item;
+        private Vector3? _velocity;
         
         public void Init(LetterItem item)
         {
             _item = item;
             Renderer.sprite = _item.ConveyorSprite;
+        }
+
+        public void SetVelocity(Vector3 velocity) => _velocity = velocity;
+
+        private void Update()
+        {
+            if(!_velocity.HasValue)
+                return;
+            
+            transform.position += _velocity.Value * Time.deltaTime;
         }
 
         public void Collect()
@@ -24,6 +35,8 @@ namespace Location.ConveyorTape.Item
 
             // TODO 2): OnCollected?.Invoke on animation completion
 
+            _velocity = null;
+            
             OnCollected?.Invoke();
             OnCollected = null;
         }
