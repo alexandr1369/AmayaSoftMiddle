@@ -6,6 +6,7 @@ namespace ConveyorTape
     public class ConveyorTapeBuildingServiceConfig : ScriptableObject
     {
         [field: SerializeField] public SpriteRenderer ConveyorTapePartPrefab { get; private set; }
+        [field: SerializeField] public SpriteRenderer ConveyorSidePartPrefab { get; private set; }
         [field: SerializeField] public Vector3 StartPoint { get; private set; }
     }
 }
