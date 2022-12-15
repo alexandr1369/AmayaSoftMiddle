@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ConveyorTape
+namespace Location.ConveyorTape
 {
     [CreateAssetMenu(menuName = "AmayaSoft/Item/New Conveyor Tape Building Service Config", fileName = "ConveyorTapeBuildingServiceConfig")]
     public class ConveyorTapeBuildingServiceConfig : ScriptableObject

@@ -1,8 +1,7 @@
-using Unity.Mathematics;
 using UnityEngine;
 using Zenject;
 
-namespace ConveyorTape
+namespace Location.ConveyorTape
 {
     public class ConveyorTapeBuildingService : MonoBehaviour
     {
