@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace GameItemSystem
 {
-    [CreateAssetMenu(menuName = "Zorg/Object/New Game Item", fileName = "GameItem", order = 1)]
+    [CreateAssetMenu(menuName = "AmayaSoft/Object/New Game Item", fileName = "GameItem")]
     public class GameItem : ScriptableObject
     {
         [field: Header("Base")]

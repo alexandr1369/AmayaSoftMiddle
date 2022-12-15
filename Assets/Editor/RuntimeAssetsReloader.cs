@@ -9,7 +9,7 @@ namespace Editor
         private static readonly string[] GameItemsFolderPaths = { $"Assets/Resources/Items" };
         
         [InitializeOnEnterPlayMode]
-        [MenuItem("Zorg/Reload Runtime Assets")]
+        [MenuItem("AmayaSoft/Reload Runtime Assets")]
         public static void ReloadRuntimeAssets()
         {
             RuntimeAssetsScanner<GameItems, GameItem>.UpdateAssetsReferences(GameItemsFolderPaths);
