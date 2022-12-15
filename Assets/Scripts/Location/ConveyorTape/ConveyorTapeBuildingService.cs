@@ -8,15 +8,22 @@ namespace Location.ConveyorTape
         [field: SerializeField] private ConveyorTapeBuildingServiceConfig Config { get; set; }
 
         private Camera _homeSceneCamera;
+        private ConveyorTape _conveyorTape;
         
         [Inject]
-        private void Construct(Camera homeSceneCamera) => _homeSceneCamera = homeSceneCamera;
+        private void Construct(Camera homeSceneCamera, ConveyorTape conveyorTape)
+        {
+            _homeSceneCamera = homeSceneCamera;
+            _conveyorTape = conveyorTape;
+        }
 
+        // TODO: remove
         private void Start()
         {
             BuildTape();
         }
 
+        // TODO: вынести в ладинг операцию
         public void BuildTape()
         {
             var tapePartPrefab = Config.ConveyorTapePartPrefab;
@@ -38,6 +45,8 @@ namespace Location.ConveyorTape
 
             SpawnTapeSide(tapeSidePrefab, transform, startPoint, Quaternion.Euler(0, 180f, 0));
             SpawnTapeSide(tapeSidePrefab, transform, endPoint, Quaternion.identity);
+            
+            _conveyorTape.Init(startPoint);
         }
 
         private static void SpawnTapePart(

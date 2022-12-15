@@ -12,4 +12,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 890a07325f41842ea989da16efda343e, type: 3}
   m_Name: GameItemCollection
   m_EditorClassIdentifier: 
-  <Assets>k__BackingField: []
+  <Assets>k__BackingField:
+  - <Name>k__BackingField: LetterA
+    <Asset>k__BackingField: {fileID: 11400000, guid: a6c08dc9908c74410ab817842bbad13b, type: 2}
+  - <Name>k__BackingField: LetterB
+    <Asset>k__BackingField: {fileID: 11400000, guid: adc4617854f634388ac8b1b020592934, type: 2}
+  - <Name>k__BackingField: LetterC
+    <Asset>k__BackingField: {fileID: 11400000, guid: c47e36e6b396443bf97257424ca6a614, type: 2}
+  - <Name>k__BackingField: LetterD
+    <Asset>k__BackingField: {fileID: 11400000, guid: ec47771664d0c4a81bc35d0d254234f6, type: 2}
+  - <Name>k__BackingField: LetterE
+    <Asset>k__BackingField: {fileID: 11400000, guid: 88a3c3ff0fc5c481bb00fa620249c67a, type: 2}
+  - <Name>k__BackingField: LetterF
+    <Asset>k__BackingField: {fileID: 11400000, guid: 2786a9b0da7df418e81b46d94e6a7882, type: 2}
+  - <Name>k__BackingField: LetterG
+    <Asset>k__BackingField: {fileID: 11400000, guid: 214934403b76e47bab0f48c892708984, type: 2}
+  - <Name>k__BackingField: LetterH
+    <Asset>k__BackingField: {fileID: 11400000, guid: 027820430c91146e1b1030781ea326d8, type: 2}
+  - <Name>k__BackingField: LetterI
+    <Asset>k__BackingField: {fileID: 11400000, guid: a20e835ae7c574b81941a45d8f07afcf, type: 2}
+  - <Name>k__BackingField: LetterJ
+    <Asset>k__BackingField: {fileID: 11400000, guid: 9a5ae64dd755541f6aea934dc18cb5ae, type: 2}
+  - <Name>k__BackingField: LetterK
+    <Asset>k__BackingField: {fileID: 11400000, guid: ad30d61c0e26841909837286366f9e13, type: 2}
+  - <Name>k__BackingField: LetterL
+    <Asset>k__BackingField: {fileID: 11400000, guid: 7c53e1c73df7c42c68aaf13c40b12bf1, type: 2}
+  - <Name>k__BackingField: LetterM
+    <Asset>k__BackingField: {fileID: 11400000, guid: 49b9c861951d84da0884ef2605c77851, type: 2}
+  - <Name>k__BackingField: LetterN
+    <Asset>k__BackingField: {fileID: 11400000, guid: c9721fc84814e4f4eaa9ee1bb1c799b6, type: 2}
+  - <Name>k__BackingField: LetterO
+    <Asset>k__BackingField: {fileID: 11400000, guid: 852f5eaa3d5a84d339081db121c7116c, type: 2}
+  - <Name>k__BackingField: LetterP
+    <Asset>k__BackingField: {fileID: 11400000, guid: 6f8a6532304e348dda421383886508c6, type: 2}
+  - <Name>k__BackingField: LetterQ
+    <Asset>k__BackingField: {fileID: 11400000, guid: 0c2b7bc3372614932bf091b68d93fdba, type: 2}
+  - <Name>k__BackingField: LetterR
+    <Asset>k__BackingField: {fileID: 11400000, guid: fe65d402121254edab454dc5f3e5c72c, type: 2}
+  - <Name>k__BackingField: LetterS
+    <Asset>k__BackingField: {fileID: 11400000, guid: 44f42ac3ea1874834ac560655461493c, type: 2}
+  - <Name>k__BackingField: LetterT
+    <Asset>k__BackingField: {fileID: 11400000, guid: 77e4174d6a798429b997c924417b1d61, type: 2}
+  - <Name>k__BackingField: LetterU
+    <Asset>k__BackingField: {fileID: 11400000, guid: 6626b4fe2e2c5477a88627dbda5b0abe, type: 2}
+  - <Name>k__BackingField: LetterV
+    <Asset>k__BackingField: {fileID: 11400000, guid: 538a2de3a6d6446288281b968c54767e, type: 2}
+  - <Name>k__BackingField: LetterW
+    <Asset>k__BackingField: {fileID: 11400000, guid: 5628f108e575749ef96f11efa0218cb5, type: 2}
+  - <Name>k__BackingField: LetterX
+    <Asset>k__BackingField: {fileID: 11400000, guid: f024b375ae640418aa52b2583729997a, type: 2}
+  - <Name>k__BackingField: LetterY
+    <Asset>k__BackingField: {fileID: 11400000, guid: 3346fd4afb5fa49b0b8b4722ec094b53, type: 2}
+  - <Name>k__BackingField: LetterZ
+    <Asset>k__BackingField: {fileID: 11400000, guid: f2c44d8ee23284bb2bc7d2c823ee6298, type: 2}
