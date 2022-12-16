@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using GameItemSystem;
 using UnityEngine;
 using Zenject;
@@ -43,5 +44,14 @@ namespace Location.Character.Will
             
             return allItems[itemIndex];
         }
+
+        public LetterItem GetRightAnswer()
+        {
+            var index = Random.Range(0, _activeWills.Count);
+            
+            return _activeWills[index].Item;
+        }
+
+        public bool IsRightAnswer(LetterItem item) => _activeWills.Select(t => t.Item).ToList().IndexOf(item) >= 0;
     }
 }

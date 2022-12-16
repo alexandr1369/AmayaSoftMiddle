@@ -28,6 +28,7 @@ namespace Location.ConveyorTape
         {
             var tapePartPrefab = Config.ConveyorTapePartPrefab;
             var tapeSidePrefab = Config.ConveyorSidePartPrefab;
+            var tapeItemTriggerPrefab = Config.ConveyorTapeItemTriggerPrefab;
             var tapePartSize = tapePartPrefab.size * tapePartPrefab.transform.localScale;
             Debug.Log($"[Conveyor Tape Building Service] Part size: {tapePartSize}");
             
@@ -45,30 +46,40 @@ namespace Location.ConveyorTape
 
             SpawnTapeSide(tapeSidePrefab, transform, startPoint, Quaternion.Euler(0, 180f, 0));
             SpawnTapeSide(tapeSidePrefab, transform, endPoint, Quaternion.identity);
-            
+            SpawnTapeItemTrigger(tapeItemTriggerPrefab, transform, startPoint - tapePartHorizontalOffset);
+
             _conveyorTape.Init(endPoint);
         }
 
         private static void SpawnTapePart(
-            SpriteRenderer tapePartPrefab,
+            SpriteRenderer prefab,
             Transform parent,
             ref Vector2 lastTapePartPoint,
             float tapePartSizeOx)
         {
-            var tapePart = Instantiate(tapePartPrefab, parent);
+            var tapePart = Instantiate(prefab, parent);
             tapePart.transform.position = lastTapePartPoint;
             lastTapePartPoint.x += tapePartSizeOx;
         }
 
         private static void SpawnTapeSide(
-            SpriteRenderer tapeSidePrefab,
+            SpriteRenderer prefab,
             Transform parent,
             Vector2 tapeSidePoint,
             Quaternion rotation)
         {
-            var tapeSide = Instantiate(tapeSidePrefab, parent);
+            var tapeSide = Instantiate(prefab, parent);
             tapeSide.transform.position = tapeSidePoint;
             tapeSide.transform.rotation = rotation;
+        }
+
+        private static void SpawnTapeItemTrigger(
+            Collider2D prefab,
+            Transform parent,
+            Vector3 position)
+        {
+            var tapeTrigger = Instantiate(prefab, parent);
+            tapeTrigger.transform.position = position;
         }
     }
 }

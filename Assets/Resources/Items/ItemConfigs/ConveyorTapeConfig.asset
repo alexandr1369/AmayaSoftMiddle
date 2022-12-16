@@ -14,4 +14,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <SpawningDelay>k__BackingField: 2
   <MaxIncorrectAnswersInARow>k__BackingField: 5
-  <TapeVelocity>k__BackingField: {x: -2, y: 0}

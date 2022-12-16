@@ -1,4 +1,5 @@
 using GameItemSystem;
+using Location.Character.Will;
 using Location.ConveyorTape.Item;
 using UnityEngine;
 using Zenject;
@@ -11,6 +12,7 @@ namespace Location.ConveyorTape
         [field: SerializeField] public ConveyorTapeConfig Config { get; private set; }
         
         private GameItems _gameItems;
+        private WillsService _willsService;
         private Utils.IFactory<ConveyorTapeItem> _factory;
         private Vector3 _startPoint;
         private float _spawningDelay;
@@ -18,9 +20,13 @@ namespace Location.ConveyorTape
         private bool _isActive;
 
         [Inject]
-        private void Construct(GameItems gameItems, Utils.IFactory<ConveyorTapeItem> factory)
+        private void Construct(
+            GameItems gameItems,
+            WillsService willsService,
+            Utils.IFactory<ConveyorTapeItem> factory)
         {
             _gameItems = gameItems;
+            _willsService = willsService;
             _factory = factory;
         }
 
@@ -55,13 +61,23 @@ namespace Location.ConveyorTape
             var item = _factory.Create();
             item.transform.position = _startPoint;
             
-            // TODO: нельзя создавать одинаковые желония для персонажей - чек где??
-            
-            // TODO: счетчик на неправильные спавны объектов хранить
-            
             var letterItems = _gameItems.GetAssets<LetterItem>();
             var randomLetter = letterItems[Random.Range(0, letterItems.Count)];
-            item.Init(randomLetter);
+            var isRightAnswer = _willsService.IsRightAnswer(randomLetter);
+            
+            if (!isRightAnswer)
+                _currentIncorrectAnswersInARow++;
+            else
+                _currentIncorrectAnswersInARow = 0;
+            
+            if (_currentIncorrectAnswersInARow > Config.MaxIncorrectAnswersInARow)
+            {
+                var rightAnswer = _willsService.GetRightAnswer();
+                item.Init(rightAnswer);
+                _currentIncorrectAnswersInARow = 0;
+            }
+            else
+                item.Init(randomLetter);
         }
     }
 }
