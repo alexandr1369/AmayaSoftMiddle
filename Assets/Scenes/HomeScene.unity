@@ -859,6 +859,51 @@ Transform:
   m_Father: {fileID: 1712593325}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &952801073
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 952801074}
+  - component: {fileID: 952801075}
+  m_Layer: 0
+  m_Name: WillsServiceInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &952801074
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952801073}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1712593325}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &952801075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952801073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff4767cc80654876a9ddb9466a7ca9d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <WillsPool>k__BackingField: {fileID: 363423700}
 --- !u!1 &1053264791
 GameObject:
   m_ObjectHideFlags: 0
@@ -1100,6 +1145,7 @@ MonoBehaviour:
   _monoInstallers:
   - {fileID: 1185810041}
   - {fileID: 935364904}
+  - {fileID: 952801075}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -1131,6 +1177,7 @@ Transform:
   m_Children:
   - {fileID: 1185810042}
   - {fileID: 935364905}
+  - {fileID: 952801074}
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

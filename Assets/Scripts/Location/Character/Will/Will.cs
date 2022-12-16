@@ -7,7 +7,8 @@ namespace Location.Character.Will
     public class Will : MonoBehaviour
     {
         public event Action OnWishComeTrue;
-        
+     
+        [field: SerializeField] private WillConfig Config { get; set; }
         [field: SerializeField] private SpriteRenderer LetterSpriteRenderer { get; set; }
 
         public LetterItem Item { get; private set; }
@@ -16,6 +17,7 @@ namespace Location.Character.Will
         {
             Item = item;
             LetterSpriteRenderer.sprite = Item.WillSprite;
+            LetterSpriteRenderer.color = Config.GetColor();
         }
         
         public void MakeWishComeTrue()

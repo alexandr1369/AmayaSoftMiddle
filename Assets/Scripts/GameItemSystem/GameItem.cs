@@ -23,7 +23,7 @@ namespace GameItemSystem
                 return true;
             }
             
-            return Equals((GameObject)obj);    
+            return Equals((Object)obj);    
         }
         
         private bool Equals(Object other) => name.Equals(other.name);

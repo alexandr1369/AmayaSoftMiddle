@@ -7,7 +7,7 @@ namespace Location.Character.Will
 {
     public class WillsService
     {
-        private readonly List<Will> _activeWills;
+        private readonly List<Will> _activeWills = new();
         private GameItems _gameItems;
         private Utils.IFactory<Will> _factory;
 
@@ -22,7 +22,7 @@ namespace Location.Character.Will
         {
             var will = _factory.Create();
             will.Init(GetAvailableItem());
-            will.OnWishComeTrue += () => _activeWills.Remove(will);
+            will.OnWishComeTrue += () => will.Init(GetAvailableItem());
             _activeWills.Add(will);
             
             return will;
@@ -36,8 +36,8 @@ namespace Location.Character.Will
         {
             var allItems = _gameItems.GetAssets<LetterItem>();
             
-            foreach(var item in _activeWills)
-                allItems.Remove(item.Item);
+            foreach(var will in _activeWills)
+                allItems.Remove(will.Item);
             
             var itemIndex = Random.Range(0, allItems.Count);
             

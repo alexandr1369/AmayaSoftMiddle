@@ -9,12 +9,6 @@ namespace Location.Character.Will
         [Inject]
         private void Construct(WillsPool pool) => _pool = pool;
 
-        public Will Create()
-        {
-            var item = _pool.Spawn();
-            item.OnWishComeTrue += () => _pool.Despawn(item);
-            
-            return item;
-        }
+        public Will Create() => _pool.Spawn();
     }
 }
