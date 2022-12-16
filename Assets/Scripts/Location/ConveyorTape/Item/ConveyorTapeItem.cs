@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using GameItemSystem;
 using Location.ConveyorTape.Item.Movement;
 using UnityEngine;
@@ -27,17 +28,14 @@ namespace Location.ConveyorTape.Item
 
         public void SetMoveBehaviour(IConveyorTapeItemMovable moveBehaviour) => _moveBehaviour = moveBehaviour;
 
-        public void PlayInteractionAnimation(Vector3 targetPosition)
+        public void PlayInteractionAnimation(Vector3 targetPosition, float duration)
         {
-            // transform.DOMov
+            transform.DOMove(targetPosition, duration)
+                .OnComplete(Collect);
         }
         
         public void Collect()
         {
-            // TODO 1): anim
-
-            // TODO 2): OnCollected?.Invoke on animation completion
-            
             OnCollected?.Invoke();
             OnCollected = null;
         }

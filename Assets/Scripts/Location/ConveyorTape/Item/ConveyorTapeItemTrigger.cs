@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Location.ConveyorTape.Item
@@ -12,7 +11,7 @@ namespace Location.ConveyorTape.Item
             if(!item)
                 return;
             
-            // item.
+            item.Collect();
         }
     }
 }

@@ -32,23 +32,25 @@ namespace Location.ConveyorTape
             var tapePartSize = tapePartPrefab.size * tapePartPrefab.transform.localScale;
             Debug.Log($"[Conveyor Tape Building Service] Part size: {tapePartSize}");
             
-            var tapePartPositionOy = Config.StartPoint.y;
+            var tapePartPositionOy = Config.StartPointOy;
             var startPoint = (Vector2)_homeSceneCamera.ViewportToWorldPoint(Vector2.zero);
             var endPoint = (Vector2)_homeSceneCamera.ViewportToWorldPoint(new Vector2(1, 1));
             startPoint.y = endPoint.y = tapePartPositionOy;
+            var conveyorTapeStartPoint = endPoint + Config.TapeItemSpawnPointOffset;
             Debug.Log($"[Conveyor Tape Building Service] StartPoint: {startPoint} | EndPoint: {endPoint}");
             
             var tapePartHorizontalOffset = new Vector2(tapePartSize.x / 2f, 0);
             var lastTapePartPoint = startPoint + tapePartHorizontalOffset;
+            var itemTriggerPoint = startPoint + Config.TapeItemTriggerOffset;
 
             while (lastTapePartPoint.x <= endPoint.x)
                 SpawnTapePart(tapePartPrefab, transform, ref lastTapePartPoint, tapePartSize.x);
 
             SpawnTapeSide(tapeSidePrefab, transform, startPoint, Quaternion.Euler(0, 180f, 0));
             SpawnTapeSide(tapeSidePrefab, transform, endPoint, Quaternion.identity);
-            SpawnTapeItemTrigger(tapeItemTriggerPrefab, transform, startPoint - tapePartHorizontalOffset);
-
-            _conveyorTape.Init(endPoint);
+            SpawnTapeItemTrigger(tapeItemTriggerPrefab, transform, itemTriggerPoint);
+            
+            _conveyorTape.Init(conveyorTapeStartPoint);
         }
 
         private static void SpawnTapePart(

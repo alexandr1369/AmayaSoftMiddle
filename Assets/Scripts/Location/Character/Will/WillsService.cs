@@ -30,9 +30,9 @@ namespace Location.Character.Will
         }
 
         /// <summary>
-        /// Желания не могут повторяться с текущими активными в облачках.
+        /// Wills can't be repeated with current active ones in clouds.
         /// </summary>
-        /// <returns>Неповторяющееся желание.</returns>
+        /// <returns>Non-recurring will.</returns>
         private LetterItem GetAvailableItem()
         {
             var allItems = _gameItems.GetAssets<LetterItem>();
