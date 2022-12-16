@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4601358436865168520}
   - component: {fileID: 3210421288641876648}
   - component: {fileID: 7577633706304072339}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ConveyorTapeItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1705451152638037092}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aff5683d94c2453d8a1a1d239d89c68c, type: 3}
   m_Name: 

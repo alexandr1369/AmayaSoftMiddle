@@ -1,59 +1,38 @@
-using System;
-using Location.ConveyorTape.Item.Movement;
 using UnityEngine;
 using Zenject;
 
 namespace Location.ConveyorTape.Item
 {
-    public class ConveyorTapeItemDraggable : MonoBehaviour
+    public class ConveyorTapeItemDraggable : MonoBehaviour/*, IBeginDragHandler, IDragHandler, IEndDragHandler*/ 
     {
         [field: SerializeField] private ConveyorTapeItem Item { get; set; }
         
-        private TouchesService _service;
+        private DragDropManager _service;
+        private Camera _homeSceneCamera;
         private Touch? _touch;
 
         [Inject]
-        private void Construct(TouchesService service) => _service = service;
+        private void Construct(DragDropManager service, Camera homeSceneCamera)
+        {
+            _service = service;
+            _homeSceneCamera = homeSceneCamera;
+        }
 
         private void Update()
         {
-            if(!_touch.HasValue)
-                return;
-
-            var touch = _touch.Value;
-            
-            switch (touch.phase)
-            {
-                case TouchPhase.Began:
-                    Item.SetMoveBehaviour(new DraggingConveyorTapeItemMoveBehaviour());
-                    
-                    break;
-                case TouchPhase.Moved:
-                    transform.position += (Vector3)touch.deltaPosition;
-                    
-                    break;
-                case TouchPhase.Ended:
-                case TouchPhase.Canceled:
-                    Item.SetMoveBehaviour(new MovableConveyorTapeItemMoveBehaviour(
-                        Item.transform, Item.Config.FallingVelocity));
-                    _touch = null;
-                    
-                    // TODO: check for:
-                    
-                    // TODO: 1) falling state (pooling)
-                    
-                    // TODO: 1) interaction animation state (eating + pooling) 
-                    
-                    break;
-            }
+            // throw new NotImplementedException();
         }
 
-        private void OnMouseDown()
-        {
-            if(!_service.HasFreeTouch())
-                return;
-
-            _touch = _service.ReserveTouch();
-        }
+        // public void OnBeginDrag(PointerEventData eventData) => 
+        //     Item.SetMoveBehaviour(new DraggingConveyorTapeItemMoveBehaviour());
+        //
+        // public void OnDrag(PointerEventData eventData)
+        // {
+        //     var pointerPosition = _homeSceneCamera.ScreenToWorldPoint(eventData.position);
+        //     transform.position = Vector3.Lerp(transform.position, pointerPosition, Time.deltaTime);
+        // }
+        //
+        // public void OnEndDrag(PointerEventData eventData) => Item.SetMoveBehaviour(
+        //     new MovableConveyorTapeItemMoveBehaviour(Item.transform, Item.Config.FallingVelocity));
     }
 }

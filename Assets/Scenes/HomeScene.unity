@@ -275,7 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 405f4ea558a3415d9dfe7be05754e5f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <TouchesService>k__BackingField: {fileID: 1322905286}
+  <DragDropManager>k__BackingField: {fileID: 0}
 --- !u!4 &293852698
 Transform:
   m_ObjectHideFlags: 0
@@ -531,6 +531,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -612,6 +613,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56666c5a40171f54783dd416a44f42bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 64
+  m_MaxRayIntersections: 0
 --- !u!1 &600729959
 GameObject:
   m_ObjectHideFlags: 0
@@ -1353,7 +1370,7 @@ GameObject:
   - component: {fileID: 1322905287}
   - component: {fileID: 1322905286}
   m_Layer: 0
-  m_Name: TouchesService
+  m_Name: DrapDropManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1371,6 +1388,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50935592cdc84396a6cd2e44e350c489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <LayerMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!4 &1322905287
 Transform:
   m_ObjectHideFlags: 0
