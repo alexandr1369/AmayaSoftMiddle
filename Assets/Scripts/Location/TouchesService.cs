@@ -8,7 +8,7 @@ namespace Location
         private readonly List<Touch> _reservedTouches = new();
         
         private void Awake() => Input.multiTouchEnabled = true;
-        
+
         public bool HasFreeTouch() => GetFreeTouch().HasValue;
 
         public Touch? ReserveTouch()

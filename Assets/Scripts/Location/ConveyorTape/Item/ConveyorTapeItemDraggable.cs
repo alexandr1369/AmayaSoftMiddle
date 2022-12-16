@@ -1,3 +1,5 @@
+using System;
+using Location.ConveyorTape.Item.Movement;
 using UnityEngine;
 using Zenject;
 
@@ -5,6 +7,8 @@ namespace Location.ConveyorTape.Item
 {
     public class ConveyorTapeItemDraggable : MonoBehaviour
     {
+        [field: SerializeField] private ConveyorTapeItem Item { get; set; }
+        
         private TouchesService _service;
         private Touch? _touch;
 
@@ -20,13 +24,25 @@ namespace Location.ConveyorTape.Item
             
             switch (touch.phase)
             {
+                case TouchPhase.Began:
+                    Item.SetMoveBehaviour(new DraggingConveyorTapeItemMoveBehaviour());
+                    
+                    break;
                 case TouchPhase.Moved:
                     transform.position += (Vector3)touch.deltaPosition;
                     
                     break;
                 case TouchPhase.Ended:
                 case TouchPhase.Canceled:
+                    Item.SetMoveBehaviour(new MovableConveyorTapeItemMoveBehaviour(
+                        Item.transform, Item.Config.FallingVelocity));
                     _touch = null;
+                    
+                    // TODO: check for:
+                    
+                    // TODO: 1) falling state (pooling)
+                    
+                    // TODO: 1) interaction animation state (eating + pooling) 
                     
                     break;
             }
@@ -34,9 +50,10 @@ namespace Location.ConveyorTape.Item
 
         private void OnMouseDown()
         {
+            if(!_service.HasFreeTouch())
+                return;
+
             _touch = _service.ReserveTouch();
-            
-            Debug.Log("Trying to get touch: " + _touch);
         }
     }
 }
