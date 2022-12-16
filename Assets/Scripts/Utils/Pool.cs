@@ -10,7 +10,7 @@ namespace Utils
 
         private List<T> Items { get; set; }
 
-        private void Awake()
+        protected virtual void Awake()
         {
             Items = new List<T>();
             

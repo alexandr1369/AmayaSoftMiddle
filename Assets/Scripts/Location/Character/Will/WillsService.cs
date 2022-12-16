@@ -1,0 +1,47 @@
+using System.Collections.Generic;
+using GameItemSystem;
+using UnityEngine;
+using Zenject;
+
+namespace Location.Character.Will
+{
+    public class WillsService
+    {
+        private readonly List<Will> _activeWills;
+        private GameItems _gameItems;
+        private Utils.IFactory<Will> _factory;
+
+        [Inject]
+        private void Construct(GameItems gameItems, Utils.IFactory<Will> factory)
+        {
+            _gameItems = gameItems;
+            _factory = factory;
+        }
+
+        public Will GetWill()
+        {
+            var will = _factory.Create();
+            will.Init(GetAvailableItem());
+            will.OnWishComeTrue += () => _activeWills.Remove(will);
+            _activeWills.Add(will);
+            
+            return will;
+        }
+
+        /// <summary>
+        /// Желания не могут повторяться с текущими активными в облачках.
+        /// </summary>
+        /// <returns>Неповторяющееся желание.</returns>
+        private LetterItem GetAvailableItem()
+        {
+            var allItems = _gameItems.GetAssets<LetterItem>();
+            
+            foreach(var item in _activeWills)
+                allItems.Remove(item.Item);
+            
+            var itemIndex = Random.Range(0, allItems.Count);
+            
+            return allItems[itemIndex];
+        }
+    }
+}

@@ -1,5 +1,6 @@
 using System;
 using GameItemSystem;
+using Location.ConveyorTape.Item.Movement;
 using UnityEngine;
 
 namespace Location.ConveyorTape.Item
@@ -8,34 +9,28 @@ namespace Location.ConveyorTape.Item
     {
         public event Action OnCollected;
         
-        [field: SerializeField] private SpriteRenderer Renderer { get; set; }
+        [field: SerializeField] public ConveyorTapeItemConfig Config { get; private set; }
+        [field: SerializeField] private SpriteRenderer SpriteRenderer { get; set; }
         
         private LetterItem _item;
-        private Vector3? _velocity;
-        
+        private IConveyorTapeItemMovable _moveBehaviour;
+
         public void Init(LetterItem item)
         {
             _item = item;
-            Renderer.sprite = _item.ConveyorSprite;
+            SpriteRenderer.sprite = _item.ConveyorSprite;
+            _moveBehaviour = new MovableConveyorTapeItemMoveBehaviour(transform, Config.TapeVelocity);
         }
 
-        public void SetVelocity(Vector3 velocity) => _velocity = velocity;
+        private void Update() => _moveBehaviour.Move();
 
-        private void Update()
-        {
-            if(!_velocity.HasValue)
-                return;
-            
-            transform.position += _velocity.Value * Time.deltaTime;
-        }
+        public void SetMoveBehaviour(IConveyorTapeItemMovable moveBehaviour) => _moveBehaviour = moveBehaviour;
 
         public void Collect()
         {
             // TODO 1): anim
 
             // TODO 2): OnCollected?.Invoke on animation completion
-
-            _velocity = null;
             
             OnCollected?.Invoke();
             OnCollected = null;

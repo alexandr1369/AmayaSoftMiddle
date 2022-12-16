@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using GameItemSystem;
 using Location.ConveyorTape.Item;
 using UnityEngine;
@@ -10,7 +8,7 @@ namespace Location.ConveyorTape
 {
     public class ConveyorTape : MonoBehaviour
     {
-        [field: SerializeField] private ConveyorTapeConfig Config { get; set; }
+        [field: SerializeField] public ConveyorTapeConfig Config { get; private set; }
         
         private GameItems _gameItems;
         private Utils.IFactory<ConveyorTapeItem> _factory;
@@ -64,7 +62,6 @@ namespace Location.ConveyorTape
             var letterItems = _gameItems.GetAssets<LetterItem>();
             var randomLetter = letterItems[Random.Range(0, letterItems.Count)];
             item.Init(randomLetter);
-            item.SetVelocity(Config.TapeVelocity);
         }
     }
 }
