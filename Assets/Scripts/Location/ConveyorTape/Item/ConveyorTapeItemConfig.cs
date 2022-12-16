@@ -7,6 +7,6 @@ namespace Location.ConveyorTape.Item
     {
         [field: SerializeField] public Vector2 TapeVelocity { get; private set; }
         [field: SerializeField] public Vector2 FallingVelocity { get; private set; }
-        [field: SerializeField] public Vector2 DraggingVelocity { get; private set; }
+        [field: SerializeField] public float DraggingVelocityMultiplier { get; private set; }
     }
 }

@@ -1,38 +1,42 @@
+using Location.ConveyorTape.Item.Movement;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Zenject;
 
 namespace Location.ConveyorTape.Item
 {
-    public class ConveyorTapeItemDraggable : MonoBehaviour/*, IBeginDragHandler, IDragHandler, IEndDragHandler*/ 
+    public class ConveyorTapeItemDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler 
     {
         [field: SerializeField] private ConveyorTapeItem Item { get; set; }
         
-        private DragDropManager _service;
         private Camera _homeSceneCamera;
-        private Touch? _touch;
+        private Vector3? _pointerPosition;
 
         [Inject]
-        private void Construct(DragDropManager service, Camera homeSceneCamera)
-        {
-            _service = service;
-            _homeSceneCamera = homeSceneCamera;
-        }
+        private void Construct(Camera homeSceneCamera) => _homeSceneCamera = homeSceneCamera;
+
+        private void OnEnable() => _pointerPosition = null;
 
         private void Update()
         {
-            // throw new NotImplementedException();
+            if(!_pointerPosition.HasValue || transform.position == _pointerPosition)
+                return;
+            
+            transform.position = Vector2.Lerp(transform.position, 
+                _pointerPosition.Value, Time.deltaTime * Item.Config.DraggingVelocityMultiplier);
         }
 
-        // public void OnBeginDrag(PointerEventData eventData) => 
-        //     Item.SetMoveBehaviour(new DraggingConveyorTapeItemMoveBehaviour());
-        //
-        // public void OnDrag(PointerEventData eventData)
-        // {
-        //     var pointerPosition = _homeSceneCamera.ScreenToWorldPoint(eventData.position);
-        //     transform.position = Vector3.Lerp(transform.position, pointerPosition, Time.deltaTime);
-        // }
-        //
-        // public void OnEndDrag(PointerEventData eventData) => Item.SetMoveBehaviour(
-        //     new MovableConveyorTapeItemMoveBehaviour(Item.transform, Item.Config.FallingVelocity));
+        public void OnBeginDrag(PointerEventData eventData) => 
+            Item.SetMoveBehaviour(new DraggingConveyorTapeItemMoveBehaviour());
+
+        public void OnDrag(PointerEventData eventData) => 
+            _pointerPosition = _homeSceneCamera.ScreenToWorldPoint(eventData.position);
+
+        public void OnEndDrag(PointerEventData eventData)
+        {
+            Item.SetMoveBehaviour(new MovableConveyorTapeItemMoveBehaviour(
+                Item.transform, Item.Config.FallingVelocity));
+            _pointerPosition = null;
+        }
     }
 }

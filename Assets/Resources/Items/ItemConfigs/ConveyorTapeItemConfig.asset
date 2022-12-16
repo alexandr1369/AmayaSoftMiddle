@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <TapeVelocity>k__BackingField: {x: -2, y: 0}
   <FallingVelocity>k__BackingField: {x: 0, y: -4}
-  <DraggingVelocity>k__BackingField: {x: 0, y: 0}
+  <DraggingVelocityMultiplier>k__BackingField: 15
