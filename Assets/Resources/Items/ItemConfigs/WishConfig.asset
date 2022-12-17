@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d678921ecfec4e319a6862172bd2dee0, type: 3}
-  m_Name: WillConfig
+  m_Script: {fileID: 11500000, guid: a414f8d9c343436e88bef8907bb8f1df, type: 3}
+  m_Name: WishConfig
   m_EditorClassIdentifier: 
   <LetterColors>k__BackingField:
-  - {r: 0.5019608, g: 0.2392157, b: 0.2392157, a: 1}
-  - {r: 0.2509804, g: 0.5176471, b: 0.42352945, a: 1}
-  - {r: 0.6431373, g: 0.3254902, b: 0.65882355, a: 1}
-  - {r: 0.7843138, g: 0.65882355, b: 0.039215688, a: 1}
+  - {r: 0.9056604, g: 0.64787465, b: 0.11534355, a: 1}
+  - {r: 0.28235295, g: 0.68235296, b: 0.43529412, a: 1}
+  - {r: 0.6629495, g: 0.28235292, b: 0.68235296, a: 1}
+  - {r: 0.78431374, g: 0.27843136, b: 0.35023105, a: 1}

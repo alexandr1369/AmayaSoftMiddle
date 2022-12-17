@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Location.Character.Will
+namespace Location.Character.Wish
 {
-    [CreateAssetMenu(menuName = "AmayaSoft/Config/New Will Config", fileName = "WillConfig")]
-    public class WillConfig : ScriptableObject
+    [CreateAssetMenu(menuName = "AmayaSoft/Config/New Wish Config", fileName = "WishConfig")]
+    public class WishConfig : ScriptableObject
     {
         [field: SerializeField] public List<Color> LetterColors { get; private set; }
 

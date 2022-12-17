@@ -1,4 +1,4 @@
-using Location.Character.Will;
+using Location.Character.Wish;
 using UnityEngine;
 using Zenject;
 
@@ -7,27 +7,27 @@ namespace Location.Character
     public class Character : MonoBehaviour
     {
         [field: SerializeField] private CharacterConfig Config { get; set; }
-        [field: SerializeField] private Transform WillSpawnPoint { get; set; }
+        [field: SerializeField] private Transform WishSpawnPoint { get; set; }
         [field: SerializeField] public Transform Mouth { get; private set; }
         
-        public Will.Will Will { get; private set; }
+        public Wish.Wish Wish { get; private set; }
         
         private CharactersInteractService _interactService;
-        private WillsService _willsService;
+        private WishesService _wishesService;
         
         [Inject]
-        private void Construct(CharactersInteractService interactService, WillsService willsService)
+        private void Construct(CharactersInteractService interactService, WishesService wishesService)
         {
             _interactService = interactService;
-            _willsService = willsService;
+            _wishesService = wishesService;
         }
 
         private void Start()
         {
             _interactService.Add(this);
-            Will = _willsService.GetWill();
-            Will.transform.parent = transform;
-            Will.transform.position = WillSpawnPoint.position;
+            Wish = _wishesService.GetWish();
+            Wish.transform.parent = transform;
+            Wish.transform.position = WishSpawnPoint.position;
         }
 
         public bool IsInteracting(Transform item) => 

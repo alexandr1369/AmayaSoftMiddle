@@ -46,8 +46,11 @@ namespace Location.ConveyorTape.Item
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            if (_service.IsInteracting(Item, out var mouthPosition))
-                Item.PlayInteractionAnimation(mouthPosition);
+            if (_service.IsInteracting(Item, out var character))
+            {
+                // character.Wish
+                Item.PlayInteractionAnimation(character.Mouth.position);
+            }
             else
             {
                 Item.SetMoveBehaviour(new MovableConveyorTapeItemMoveBehaviour(

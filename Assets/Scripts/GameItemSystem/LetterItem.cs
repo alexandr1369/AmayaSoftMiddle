@@ -7,6 +7,6 @@ namespace GameItemSystem
     {
         [field: Header("Letter")]
         [field: SerializeField] public Sprite ConveyorSprite { get; private set; }
-        [field: SerializeField] public Sprite WillSprite { get; private set; }
+        [field: SerializeField] public Sprite WishSprite { get; private set; }
     }
 }

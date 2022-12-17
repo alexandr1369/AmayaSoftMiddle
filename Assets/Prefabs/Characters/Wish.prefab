@@ -94,9 +94,9 @@ GameObject:
   m_Component:
   - component: {fileID: 84362919376462549}
   - component: {fileID: 84362919376462548}
-  - component: {fileID: 84362919376462551}
+  - component: {fileID: 6666121925372604600}
   m_Layer: 0
-  m_Name: Will
+  m_Name: Wish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,7 +170,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &84362919376462551
+--- !u!114 &6666121925372604600
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -182,5 +182,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a6b021632041f492f441f55aac208d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Config>k__BackingField: {fileID: 11400000, guid: 35d881cdf882e4736bf1d85aaaec486a, type: 2}
+  <Config>k__BackingField: {fileID: 11400000, guid: d67c07935abb24e0e844d56856b80918, type: 2}
   <LetterSpriteRenderer>k__BackingField: {fileID: 84362918724507704}

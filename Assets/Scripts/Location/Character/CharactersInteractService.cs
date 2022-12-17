@@ -8,19 +8,19 @@ namespace Location.Character
     {
         private readonly List<Character> _characters = new();
 
-        public bool IsInteracting(ConveyorTapeItem item, out Vector3 mouthPosition)
+        public bool IsInteracting(ConveyorTapeItem item, out Character character)
         {
             var interactingCharacter = _characters.Find(character => 
-                character.IsInteracting(item.transform) && character.Will.Item == item.Item);
+                character.IsInteracting(item.transform) && character.Wish.Item == item.Item);
 
             if (!interactingCharacter)
             {
-                mouthPosition = Vector3.zero;
+                character = null;
                 
                 return false;
             }
             
-            mouthPosition = interactingCharacter.Mouth.position;
+            character = interactingCharacter;
             
             return true;
         }

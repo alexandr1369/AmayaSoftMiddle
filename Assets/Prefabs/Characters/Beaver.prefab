@@ -1805,7 +1805,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4265552712054830847}
   m_Layer: 0
-  m_Name: WillSpawnPoint
+  m_Name: WishSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4756,7 +4756,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Config>k__BackingField: {fileID: 11400000, guid: 4afae8abdb57642239f74db0adaa4a20, type: 2}
-  <WillSpawnPoint>k__BackingField: {fileID: 4265552712054830847}
+  <WishSpawnPoint>k__BackingField: {fileID: 4265552712054830847}
   <Mouth>k__BackingField: {fileID: 798372498555826237}
 --- !u!1 &8856930361833387363
 GameObject:
