@@ -48,7 +48,7 @@ namespace Location.ConveyorTape.Item
         {
             if (_service.IsInteracting(Item, out var character))
             {
-                // character.Wish
+                character.Wish.MakeWishComeTrue();
                 Item.PlayInteractionAnimation(character.Mouth.position);
             }
             else
