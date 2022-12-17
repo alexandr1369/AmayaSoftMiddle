@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: ConveyorTapeConfig
   m_EditorClassIdentifier: 
   <SpawningDelay>k__BackingField: 2
+  <BonusItemChance>k__BackingField: 15
   <MaxIncorrectAnswersInARow>k__BackingField: 1

@@ -64,6 +64,13 @@ namespace Location.ConveyorTape
             var letterItems = _gameItems.GetAssets<LetterItem>();
             var randomLetter = letterItems[Random.Range(0, letterItems.Count)];
             var isRightAnswer = _wishesService.IsRightAnswer(randomLetter);
+            var isBonus = Config.IsBonus();
+
+            if (isBonus)
+            {
+                item.InitBonus(item.Config.BonusSprite);
+                return;
+            }
             
             if (!isRightAnswer)
                 _currentIncorrectAnswersInARow++;

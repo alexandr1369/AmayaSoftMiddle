@@ -11,12 +11,11 @@ namespace Location.Character
         public bool IsInteracting(ConveyorTapeItem item, out Character character)
         {
             var interactingCharacter = _characters.Find(character => 
-                character.IsInteracting(item.transform) && character.Wish.Item == item.Item);
+                character.IsInteracting(item.transform) && (character.Wish.Item == item.Item || item.IsBonus));
 
             if (!interactingCharacter)
             {
                 character = null;
-                
                 return false;
             }
             

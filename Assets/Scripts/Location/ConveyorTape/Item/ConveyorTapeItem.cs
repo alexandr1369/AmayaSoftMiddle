@@ -14,6 +14,7 @@ namespace Location.ConveyorTape.Item
         [field: SerializeField] public SpriteRenderer SpriteRenderer { get; private set; }
         
         public LetterItem Item { get; private set; }
+        public bool IsBonus { get; private set; }
         
         private IConveyorTapeItemMovable _moveBehaviour;
         private Sequence _interactionAnimationSequence;
@@ -29,7 +30,16 @@ namespace Location.ConveyorTape.Item
         public void Init(LetterItem item)
         {
             Item = item;
+            IsBonus = false;
             SpriteRenderer.sprite = Item.ConveyorSprite;
+            _moveBehaviour = new MovableConveyorTapeItemMoveBehaviour(transform, Config.TapeVelocity);
+            transform.localScale = _startScale;
+        }
+
+        public void InitBonus(Sprite icon)
+        {
+            IsBonus = true;
+            SpriteRenderer.sprite = icon;
             _moveBehaviour = new MovableConveyorTapeItemMoveBehaviour(transform, Config.TapeVelocity);
             transform.localScale = _startScale;
         }
