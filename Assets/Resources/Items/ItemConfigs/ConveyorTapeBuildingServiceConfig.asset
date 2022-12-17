@@ -15,6 +15,8 @@ MonoBehaviour:
   <ConveyorTapePartPrefab>k__BackingField: {fileID: 6873779893679870511, guid: 245662bc5b150417d9109fce0f26b153, type: 3}
   <ConveyorSidePartPrefab>k__BackingField: {fileID: 6873779893679870511, guid: b070b3d1c379c41b79288842e5be11d3, type: 3}
   <ConveyorTapeItemTriggerPrefab>k__BackingField: {fileID: 7365111177153622758, guid: 2d5dfe0c54ea849829aea41f7cbf7596, type: 3}
+  <ConveyorTapeItemBottomTriggerPrefab>k__BackingField: {fileID: 8821509201614820157, guid: f804e64970f2b4e5fa186dfaeb8a3afa, type: 3}
   <StartPointOy>k__BackingField: -3.3
   <TapeItemTriggerOffset>k__BackingField: {x: -2.5, y: 0}
   <TapeItemSpawnPointOffset>k__BackingField: {x: 1, y: 0}
+  <TapeItemBottomTriggerOffset>k__BackingField: {x: 0, y: -3.5}

@@ -11,27 +11,55 @@ namespace Location.ConveyorTape.Item
         public event Action OnCollected;
         
         [field: SerializeField] public ConveyorTapeItemConfig Config { get; private set; }
-        [field: SerializeField] private SpriteRenderer SpriteRenderer { get; set; }
+        [field: SerializeField] public SpriteRenderer SpriteRenderer { get; private set; }
         
         public LetterItem Item { get; private set; }
         
         private IConveyorTapeItemMovable _moveBehaviour;
+        private Sequence _interactionAnimationSequence;
+        private Vector2 _startScale;
+        private Vector2 _collectingScale;
+
+        private void Awake()
+        {
+            _startScale = transform.localScale;
+            _collectingScale = _startScale * Config.CollectAnimationStartScaleMultiplier;
+        }
 
         public void Init(LetterItem item)
         {
             Item = item;
             SpriteRenderer.sprite = Item.ConveyorSprite;
             _moveBehaviour = new MovableConveyorTapeItemMoveBehaviour(transform, Config.TapeVelocity);
+            transform.localScale = _startScale;
         }
 
         private void Update() => _moveBehaviour.Move();
 
         public void SetMoveBehaviour(IConveyorTapeItemMovable moveBehaviour) => _moveBehaviour = moveBehaviour;
 
-        public void PlayInteractionAnimation(Vector3 targetPosition, float duration)
+        public void PlayDraggingAnimation(bool state)
         {
-            transform.DOMove(targetPosition, duration)
-                .OnComplete(Collect);
+            if(_interactionAnimationSequence != null && _interactionAnimationSequence.IsPlaying())
+                _interactionAnimationSequence.Complete();
+            
+            var targetScale = state ? _collectingScale : _startScale;
+            _interactionAnimationSequence = DOTween.Sequence();
+            _interactionAnimationSequence.Append(transform.DOScale(targetScale, 
+                Config.CollectAnimationStartScaleDuration));
+        }
+        
+        public void PlayInteractionAnimation(Vector3 targetPosition)
+        {
+            if(_interactionAnimationSequence != null && _interactionAnimationSequence.IsPlaying())
+                _interactionAnimationSequence.Complete();
+            
+            _interactionAnimationSequence = DOTween.Sequence();
+            _interactionAnimationSequence.Append(transform.DOMove(targetPosition, Config.CollectAnimationDuration));
+            _interactionAnimationSequence.Join(transform.DOScale(Config.CollectAnimationEndScale, 
+                Config.CollectAnimationEndScaleDuration));
+            _interactionAnimationSequence.OnComplete(Collect);
+            _interactionAnimationSequence.Play();
         }
         
         public void Collect()

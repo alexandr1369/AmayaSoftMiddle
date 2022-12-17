@@ -13,5 +13,11 @@ MonoBehaviour:
   m_Name: ConveyorTapeItemConfig
   m_EditorClassIdentifier: 
   <TapeVelocity>k__BackingField: {x: -2, y: 0}
-  <FallingVelocity>k__BackingField: {x: 0, y: -4}
-  <DraggingVelocityMultiplier>k__BackingField: 15
+  <FallingVelocity>k__BackingField: {x: 0, y: -6}
+  <DraggingVelocity>k__BackingField: 15
+  <DraggingOrderInLayer>k__BackingField: 50
+  <CollectAnimationDuration>k__BackingField: 1
+  <CollectAnimationStartScaleDuration>k__BackingField: 0.5
+  <CollectAnimationEndScaleDuration>k__BackingField: 0.5
+  <CollectAnimationStartScaleMultiplier>k__BackingField: 1.25
+  <CollectAnimationEndScale>k__BackingField: {x: 0, y: 0}

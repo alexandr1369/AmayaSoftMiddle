@@ -1,3 +1,4 @@
+using Location.Character;
 using Location.ConveyorTape.Item.Movement;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,10 +11,16 @@ namespace Location.ConveyorTape.Item
         [field: SerializeField] private ConveyorTapeItem Item { get; set; }
         
         private Camera _homeSceneCamera;
+        private CharactersInteractService _service;
         private Vector3? _pointerPosition;
+        private int _normalOrderInLayer;
 
         [Inject]
-        private void Construct(Camera homeSceneCamera) => _homeSceneCamera = homeSceneCamera;
+        private void Construct(Camera homeSceneCamera, CharactersInteractService service)
+        {
+            _homeSceneCamera = homeSceneCamera;
+            _service = service;
+        }
 
         private void OnEnable() => _pointerPosition = null;
 
@@ -23,19 +30,32 @@ namespace Location.ConveyorTape.Item
                 return;
             
             transform.position = Vector2.Lerp(transform.position, 
-                _pointerPosition.Value, Time.deltaTime * Item.Config.DraggingVelocityMultiplier);
+                _pointerPosition.Value, Time.deltaTime * Item.Config.DraggingVelocity);
         }
 
-        public void OnBeginDrag(PointerEventData eventData) => 
+        public void OnBeginDrag(PointerEventData eventData)
+        {
             Item.SetMoveBehaviour(new DraggingConveyorTapeItemMoveBehaviour());
+            _normalOrderInLayer = Item.SpriteRenderer.sortingOrder;
+            Item.SpriteRenderer.sortingOrder = Item.Config.DraggingOrderInLayer;
+            Item.PlayDraggingAnimation(true);
+        }
 
         public void OnDrag(PointerEventData eventData) => 
             _pointerPosition = _homeSceneCamera.ScreenToWorldPoint(eventData.position);
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            Item.SetMoveBehaviour(new MovableConveyorTapeItemMoveBehaviour(
-                Item.transform, Item.Config.FallingVelocity));
+            if (_service.IsInteracting(Item, out var mouthPosition))
+                Item.PlayInteractionAnimation(mouthPosition);
+            else
+            {
+                Item.SetMoveBehaviour(new MovableConveyorTapeItemMoveBehaviour(
+                    Item.transform, Item.Config.FallingVelocity));
+                Item.PlayDraggingAnimation(false);
+            }
+
+            Item.SpriteRenderer.sortingOrder = _normalOrderInLayer;
             _pointerPosition = null;
         }
     }

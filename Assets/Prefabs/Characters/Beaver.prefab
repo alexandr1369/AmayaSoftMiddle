@@ -4741,7 +4741,7 @@ Transform:
   - {fileID: 798372498555826237}
   - {fileID: 4265552712054830847}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5544704114937101183
 MonoBehaviour:
@@ -4755,7 +4755,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d714ffbe380e4f4e9a03d2f73da6acfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Config>k__BackingField: {fileID: 11400000, guid: 4afae8abdb57642239f74db0adaa4a20, type: 2}
   <WillSpawnPoint>k__BackingField: {fileID: 4265552712054830847}
+  <Mouth>k__BackingField: {fileID: 798372498555826237}
 --- !u!1 &8856930361833387363
 GameObject:
   m_ObjectHideFlags: 0
