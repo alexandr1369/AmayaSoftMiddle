@@ -6,6 +6,8 @@ namespace Location.Character
 {
     public class CharactersInteractService : MonoBehaviour
     {
+        public int CharactersCount => _characters.Count;
+        
         private readonly List<Character> _characters = new();
 
         public bool IsInteracting(ConveyorTapeItem item, out Character character)
