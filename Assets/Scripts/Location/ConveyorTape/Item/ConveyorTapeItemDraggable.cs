@@ -40,10 +40,11 @@ namespace Location.ConveyorTape.Item
             _normalOrderInLayer = Item.SpriteRenderer.sortingOrder;
             Item.SpriteRenderer.sortingOrder = Item.Config.DraggingOrderInLayer;
             Item.PlayDraggingAnimation(true);
+            _context.AudioService.PlayLocalFx(Item.AudioSource, _context.AudioService.ClickClip);
         }
 
         public void OnDrag(PointerEventData eventData) => 
-            _pointerPosition = _context.HomeSceneCamera.ScreenToWorldPoint(eventData.position);
+            _pointerPosition = _context.HomeSceneCamera.Camera.ScreenToWorldPoint(eventData.position);
 
         public void OnEndDrag(PointerEventData eventData)
         {

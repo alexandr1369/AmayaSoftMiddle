@@ -97,5 +97,6 @@ public class AudioService : MonoBehaviour
     public void PreloadHomeAudio()
     {
         ClickClip.LoadAudioData();
+        InteractionClip.LoadAudioData();
     }
 }

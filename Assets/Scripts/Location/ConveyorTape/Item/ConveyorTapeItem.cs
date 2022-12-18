@@ -1,8 +1,10 @@
 using System;
 using DG.Tweening;
 using GameItemSystem;
+using LoadingSystem.Loading.Operations.Home;
 using Location.ConveyorTape.Item.Movement;
 using UnityEngine;
+using Zenject;
 
 namespace Location.ConveyorTape.Item
 {
@@ -12,14 +14,19 @@ namespace Location.ConveyorTape.Item
         
         [field: SerializeField] public ConveyorTapeItemConfig Config { get; private set; }
         [field: SerializeField] public SpriteRenderer SpriteRenderer { get; private set; }
+        [field: SerializeField] public AudioSource AudioSource { get; private set; }
         
         public LetterItem Item { get; private set; }
         public bool IsBonus { get; private set; }
         
+        private HomeSceneLoadingContext _context;
         private IConveyorTapeItemMovable _moveBehaviour;
         private Sequence _interactionAnimationSequence;
         private Vector2 _startScale;
         private Vector2 _collectingScale;
+
+        [Inject]
+        private void Construct(HomeSceneLoadingContext context) => _context = context;
 
         private void Awake()
         {
@@ -70,6 +77,7 @@ namespace Location.ConveyorTape.Item
                 Config.CollectAnimationEndScaleDuration));
             _interactionAnimationSequence.OnComplete(Collect);
             _interactionAnimationSequence.Play();
+            _context.AudioService.PlayLocalFx(AudioSource, _context.AudioService.InteractionClip);
         }
         
         public void Collect()
