@@ -10,9 +10,9 @@ namespace LoadingSystem.Loading.Operations.Home
 
         public override async UniTask Load()
         {
-            _audioService.PlayHomeMusic();
             _audioService.PreloadHomeAudio();
-            
+            _audioService.PlayHomeMusic();
+         
             await UniTask.Yield();
         }
     }

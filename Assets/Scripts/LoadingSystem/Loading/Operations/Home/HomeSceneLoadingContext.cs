@@ -1,4 +1,5 @@
 using Location;
+using Location.ConveyorTape;
 using StateSystem;
 
 namespace LoadingSystem.Loading.Operations.Home
@@ -9,5 +10,7 @@ namespace LoadingSystem.Loading.Operations.Home
         public SceneLoadingService SceneLoadingService { get; set; }
         public AudioService AudioService { get; set; }
         public HomeSceneCamera HomeSceneCamera { get; set; }
+        public ConveyorTapeBuildingService ConveyorTapeBuildingService { get; set; }
+        public ConveyorTape ConveyorTape { get; set; }
     }
 }

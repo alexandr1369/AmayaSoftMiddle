@@ -1,4 +1,5 @@
 using GameItemSystem;
+using LoadingSystem.Loading.Operations.Home;
 using Location.Character.Wish;
 using Location.ConveyorTape.Item;
 using UnityEngine;
@@ -23,23 +24,21 @@ namespace Location.ConveyorTape
         private void Construct(
             GameItems gameItems,
             WishesService wishesService,
-            Utils.IFactory<ConveyorTapeItem> factory)
+            Utils.IFactory<ConveyorTapeItem> factory,
+            HomeSceneLoadingContext context)
         {
             _gameItems = gameItems;
             _wishesService = wishesService;
             _factory = factory;
+            context.ConveyorTape = this;
         }
 
         public void Init(Vector3 startPoint) => _startPoint = startPoint;
         
-        // TODO: вынести в ладинг операцию
         public void StartConveyorTape() => _isActive = true;
 
         public void StopConveyorTape() => _isActive = false;
         
-        // TODO: remove
-        private void Start() => StartConveyorTape();
-
         private void Update() => ContinueConveyorTape();
 
         private void ContinueConveyorTape()

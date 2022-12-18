@@ -12,19 +12,13 @@ namespace Location.ConveyorTape
         private ConveyorTape _conveyorTape;
         
         [Inject]
-        private void Construct(HomeSceneLoadingContext context, ConveyorTape conveyorTape)
+        private void Construct(ConveyorTape conveyorTape, HomeSceneLoadingContext context)
         {
-            _context = context;
             _conveyorTape = conveyorTape;
+            _context = context;
+            _context.ConveyorTapeBuildingService = this;
         }
 
-        // TODO: remove
-        private void Start()
-        {
-            BuildTape();
-        }
-
-        // TODO: вынести в ладинг операцию
         public void BuildTape()
         {
             var tapePartPrefab = Config.ConveyorTapePartPrefab;
