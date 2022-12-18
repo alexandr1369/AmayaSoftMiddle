@@ -15,8 +15,8 @@ namespace Location.ConveyorTape.Item
     {
         public event Action OnCollected;
         
-        [field: SerializeField] public ConveyorTapeItemConfig Config { get; private set; }
-        [field: SerializeField] public SpriteRenderer SpriteRenderer { get; private set; }
+        [field: SerializeField] public ConveyorTapeItemConfig Config { get; set; }
+        [field: SerializeField] public SpriteRenderer SpriteRenderer { get; set; }
         [field: SerializeField] public AudioSource AudioSource { get; private set; }
         [field: SerializeField] private List<DropItem> RightAnswerRewards { get; set; }
         

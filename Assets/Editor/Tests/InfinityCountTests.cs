@@ -8,7 +8,7 @@ namespace Editor.Tests
         [Test]
         public void WhenCreatingInfinityCountWithRate0_0015K_ThenOutputShouldBe1()
         {
-            // Act
+            // Arrange
             var count = new InfinityCount(.0015f, 3);
 
             // Assert
@@ -18,7 +18,7 @@ namespace Editor.Tests
         [Test]
         public void WhenCreatingInfinityCountWithRate999_9K_ThenOutputShouldBe999K()
         {
-            // Act
+            // Arrange
             var count = new InfinityCount(999.9f, 3);
 
             // Assert
@@ -28,11 +28,11 @@ namespace Editor.Tests
         [Test]
         public void WhenCreatingInfinityCountWithRate10M_AndRemovingFromItInfinityCountWithRate100KFor99Times_ThenOutputShouldBe100K()
         {
-            // Act
+            // Arrange
             var count1 = new InfinityCount(10, 6);
             var count2 = new InfinityCount(100, 3);
             
-            // Arrange
+            // Act
             for(var i = 0; i < 99; i++)
                 count1 -= count2;
             
@@ -43,11 +43,11 @@ namespace Editor.Tests
         [Test]
         public void WhenCreatingInfinityCountWith10M_AndRemovingFromItInfinityCountWithRate100KFor99999Times_ThenOutputShouldBe100K()
         {
-            // Act
+            // Arrange
             var count1 = new InfinityCount(100, 3);
             var count2 = new InfinityCount(10, 9);
 
-            // Arrange
+            // Act
             for (var i = 0; i < 99999; i++)
                 count2 -= count1;
             
@@ -58,7 +58,7 @@ namespace Editor.Tests
         [Test]
         public void WhenCreatingInfinityCountWithRate1250000000M_ThenOutputShouldBe1_25AA()
         {
-            // Act
+            // Arrange
             var count = new InfinityCount(1250000000, 6);
 
             // Assert
@@ -68,10 +68,10 @@ namespace Editor.Tests
         [Test]
         public void WhenCreatingInfinityCountWithRate60B_AndDividingItBy6000_ThenOutputShouldBe10B()
         {
-            // Act
+            // Arrange
             var count = new InfinityCount(60, 12);
 
-            // Arrange
+            // Act
             count /= 6000;
 
             // Assert
@@ -81,10 +81,10 @@ namespace Editor.Tests
         [Test]
         public void WhenCreatingInfinityCountWithRate10B_AndMultiplyingItBy100_ThenOutputShouldBe1T()
         {
-            // Act
+            // Arrange
             var count = new InfinityCount(10, 9);
 
-            // Arrange
+            // Act
             count *= 100;
 
             // Assert
@@ -94,11 +94,11 @@ namespace Editor.Tests
         [Test]
         public void WhenCreatingInfinityCountWithRate50B_AndCheckingForLessOrEqualValueThanInfinityCountWithRate900M_ThenOutputShouldBeFalse()
         {
-            // Act
+            // Arrange
             var count1 = new InfinityCount(50, 12);
             var count2 = new InfinityCount(900, 6);
 
-            // Arrange
+            // Act
             var expression = count1 <= count2;
 
             // Assert
@@ -108,10 +108,10 @@ namespace Editor.Tests
         [Test]
         public void WhenCreatingInfinityCountWithRate1_1K_AndRemovingFromIt10For11Times_ThenOutputShouldBe990()
         {
-            // Act
+            // Arrange
             var count = new InfinityCount(1.1f, 3);
 
-            // Arrange
+            // Act
             for(var i = 0; i < 11; i++)
                 count -= 10;
 
@@ -122,10 +122,10 @@ namespace Editor.Tests
         [Test]
         public void WhenCreatingInfinityCountWithRate990_AndAddingToIt1For110010Times_ThenOutputShouldBe111K()
         {
-            // Act
+            // Arrange
             var count = new InfinityCount(990);
 
-            // Arrange
+            // Act
             for(var i = 0; i < 11001; i++)
                 for(var j = 0; j < 10; j++)
                     count++;

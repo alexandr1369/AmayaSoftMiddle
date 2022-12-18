@@ -3,6 +3,7 @@ using Location.Character;
 using Location.ConveyorTape.Item.Movement;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Utils;
 using Zenject;
 
 namespace Location.ConveyorTape.Item
@@ -11,43 +12,60 @@ namespace Location.ConveyorTape.Item
     {
         [field: SerializeField] private ConveyorTapeItem Item { get; set; }
         
-        private HomeSceneLoadingContext _context;
+        public HomeSceneLoadingContext Context { get; set; }
+        public Vector3? PointerPosition { get; private set; }
+        
+        private InputDelegate _inputDelegate;
         private CharactersInteractService _service;
-        private Vector3? _pointerPosition;
         private int _normalOrderInLayer;
 
         [Inject]
-        private void Construct(HomeSceneLoadingContext context, CharactersInteractService service)
+        private void Construct(
+            HomeSceneLoadingContext context,
+            InputDelegate inputDelegate,
+            CharactersInteractService service)
         {
-            _context = context;
+            Context = context;
+            _inputDelegate = inputDelegate;
             _service = service;
         }
 
-        private void OnEnable() => _pointerPosition = null;
+        private void OnEnable() => PointerPosition = null;
 
         private void Update()
         {
-            if(!_pointerPosition.HasValue || transform.position == _pointerPosition)
+            if(!PointerPosition.HasValue || transform.position == PointerPosition)
                 return;
             
             transform.position = Vector2.Lerp(transform.position, 
-                _pointerPosition.Value, Time.deltaTime * Item.Config.DraggingVelocity);
+                PointerPosition.Value, Time.deltaTime * Item.Config.DraggingVelocity);
         }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
+            if(!_inputDelegate.HasPermission(this))
+                return;
+            
             Item.SetMoveBehaviour(new DraggingConveyorTapeItemMoveBehaviour());
             _normalOrderInLayer = Item.SpriteRenderer.sortingOrder;
             Item.SpriteRenderer.sortingOrder = Item.Config.DraggingOrderInLayer;
             Item.PlayDraggingAnimation(true);
-            _context.AudioService.PlayLocalFx(Item.AudioSource, _context.AudioService.ClickClip);
+            Context.AudioService.PlayLocalFx(Item.AudioSource, Context.AudioService.ClickClip);
         }
 
-        public void OnDrag(PointerEventData eventData) => 
-            _pointerPosition = _context.HomeSceneCamera.Camera.ScreenToWorldPoint(eventData.position);
+        public void OnDrag(PointerEventData eventData)
+        {
+            if(Context == null || !_inputDelegate.HasPermission(this))
+                return;
+            
+            PointerPosition = Context.HomeSceneCamera.Camera.ScreenToWorldPoint(eventData.position);
+        }
 
         public void OnEndDrag(PointerEventData eventData)
         {
+            if(!_inputDelegate.HasPermission(this))
+                return;
+            
             if (_service.IsInteracting(Item, out var character))
             {
                 character.Wish.MakeWishComeTrue();
@@ -61,7 +79,7 @@ namespace Location.ConveyorTape.Item
             }
 
             Item.SpriteRenderer.sortingOrder = _normalOrderInLayer;
-            _pointerPosition = null;
+            PointerPosition = null;
         }
     }
 }

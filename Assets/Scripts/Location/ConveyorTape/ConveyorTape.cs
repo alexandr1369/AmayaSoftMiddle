@@ -18,7 +18,8 @@ namespace Location.ConveyorTape
         private Vector3 _startPoint;
         private float _spawningDelay;
         private int _currentIncorrectAnswersInARow;
-        private bool _isActive;
+        
+        public bool IsActive { get; private set; }
 
         [Inject]
         private void Construct(
@@ -35,15 +36,15 @@ namespace Location.ConveyorTape
 
         public void Init(Vector3 startPoint) => _startPoint = startPoint;
         
-        public void StartConveyorTape() => _isActive = true;
+        public void StartConveyorTape() => IsActive = true;
 
-        public void StopConveyorTape() => _isActive = false;
+        public void StopConveyorTape() => IsActive = false;
         
         private void Update() => ContinueConveyorTape();
 
         private void ContinueConveyorTape()
         {
-            if(!_isActive)
+            if(!IsActive)
                 return;
             
             _spawningDelay -= Time.deltaTime;
