@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using LoadingSystem.Loading.Operations.Home;
 using StateSystem;
@@ -15,20 +14,8 @@ public class AudioService : MonoBehaviour
     [field: Header("Clips")]
     [field: SerializeField] public AudioClip HomeMusic1Clip { get; private set; }
     [field: SerializeField] public AudioClip HomeMusic2Clip { get; private set; }
-    [field: SerializeField] public AudioClip BarnUnlockClip { get; private set; }
     [field: SerializeField] public AudioClip ClickClip { get; private set; }
-    [field: SerializeField] public AudioClip UpgradeClip { get; private set; }
-    [field: SerializeField] public AudioClip ChickenClip { get; private set; }
-    [field: SerializeField] public AudioClip CowClip { get; private set; }
-    [field: SerializeField] public AudioClip PlantingClip { get; private set; }
-    [field: SerializeField] public AudioClip WateringClip { get; private set; }
-    [field: SerializeField] public AudioClip HarvestingClip { get; private set; }
-    [field: SerializeField] public AudioClip Swing1Clip { get; private set; }
-    [field: SerializeField] public AudioClip Swing2Clip { get; private set; }
-    [field: SerializeField] public AudioClip CoinCollectClip { get; private set; }
-    [field: SerializeField] public AudioClip TickClip { get; private set; }
-    [field: SerializeField] public AudioClip TravelClip { get; private set; }
-    [field: SerializeField] public AudioClip TreeShakingClip { get; private set; }
+    [field: SerializeField] public AudioClip InteractionClip { get; private set; }
 
     public bool IsMusicEnabled { get; private set; }
     public bool IsSoundEnabled { get; private set; }
@@ -109,19 +96,6 @@ public class AudioService : MonoBehaviour
 
     public void PreloadHomeAudio()
     {
-        BarnUnlockClip.LoadAudioData();
         ClickClip.LoadAudioData();
-        UpgradeClip.LoadAudioData();
-        ChickenClip.LoadAudioData();
-        CowClip.LoadAudioData();
-        PlantingClip.LoadAudioData();
-        WateringClip.LoadAudioData();
-        HarvestingClip.LoadAudioData();
-        Swing1Clip.LoadAudioData();
-        Swing2Clip.LoadAudioData();
-        CoinCollectClip.LoadAudioData();
-        TickClip.LoadAudioData();
-        TravelClip.LoadAudioData();
-        TreeShakingClip.LoadAudioData();
     }
 }

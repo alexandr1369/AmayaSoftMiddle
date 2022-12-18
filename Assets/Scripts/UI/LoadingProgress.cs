@@ -3,19 +3,16 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    [RequireComponent(typeof(Image))]
     public class LoadingProgress : MonoBehaviour
     {
-        private Image _indicator;
-
-        private void Awake() => _indicator = GetComponent<Image>();
-
+        [field: SerializeField] private Image Indicator { get; set; }
+        
         public void SetProgress(float value)
         {
-            if (!_indicator)
+            if (!Indicator)
                 return;
             
-            _indicator.fillAmount = value;
+            Indicator.fillAmount = value;
         }
     }
 }

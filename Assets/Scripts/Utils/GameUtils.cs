@@ -7,6 +7,7 @@ namespace Utils
 {
     public static class GameUtils
     {
+        public const int TARGET_FPS = 60;
         public const float PAUSE_TIME_SCALE = 0;
         public const float DEFAULT_TIME_SCALE = 1f;
         public const float TOLERANCE = .01f;

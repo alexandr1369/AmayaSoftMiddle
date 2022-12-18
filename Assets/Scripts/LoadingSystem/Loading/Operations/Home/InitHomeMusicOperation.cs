@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace LoadingSystem.Loading.Operations.Home
 {
@@ -8,10 +9,14 @@ namespace LoadingSystem.Loading.Operations.Home
         
         public InitHomeMusicOperation(AudioService audioService) => _audioService = audioService;
 
+        public InitHomeMusicOperation()
+        {
+        }
+
         public override async UniTask Load()
         {
-            _audioService.PlayHomeMusic();
-            _audioService.PreloadHomeAudio();
+            // _audioService.PlayHomeMusic();
+            // _audioService.PreloadHomeAudio();
             
             await UniTask.Yield();
         }

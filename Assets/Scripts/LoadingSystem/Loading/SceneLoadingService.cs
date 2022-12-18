@@ -12,6 +12,7 @@ using Zenject;
 
 namespace LoadingSystem.Loading
 {
+    [RequireComponent(typeof(CanvasGroup))]
     public class SceneLoadingService : MonoBehaviour
     {
         private static readonly InputDelegate.InputRestriction ActionsRestriction = _ => false;
@@ -94,7 +95,7 @@ namespace LoadingSystem.Loading
             while(!loadingSequenceTask.Status.IsCompleted())
             {
                 var progressValue = sequence.Progress();
-                
+
                 if (ProgressBar) 
                     ProgressBar.SetProgress(progressValue);
 

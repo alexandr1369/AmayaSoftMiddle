@@ -33,7 +33,7 @@ namespace LoadingSystem.Loading.Operations
             if (_currentOperationIndex >= _operations.Count)
                 return Weight();
 
-            for (var i = 0; i <= _currentOperationIndex; i++)
+            for (var i = _currentOperationIndex; i >= 0; i--)
             {
                 var op = _operations[i];
 
