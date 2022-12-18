@@ -13,6 +13,7 @@ namespace StateSystem
         [field: SerializeField] public UserState.UserState UserState { get; private set; }
         [field: SerializeField] public InventoryState InventoryState { get; private set; }
         [field: SerializeField] public List<IntCountedItemState> IntCountedItemStates { get; private set; }
+        [field: SerializeField] public List<InfinityCountedItemState> InfinityCountedItemStates { get; private set; }
         [field: SerializeField] public List<AwaitingItemState> AwaitingItemStates { get; private set; }
 
         /// <summary>
@@ -36,6 +37,20 @@ namespace StateSystem
 
             var newItemState = new IntCountedItemState(id, IntCountedItemState.NO_CAPACITY);
             IntCountedItemStates.Add(newItemState);
+            
+            return newItemState;
+        }
+        
+        public InfinityCountedItemState GetInfinityCountedItemStateForItem(GameItem item) =>
+            GetInfinityCountedItemStateForId(item.name);
+
+        public InfinityCountedItemState GetInfinityCountedItemStateForId(string id)
+        {
+            foreach (var state in InfinityCountedItemStates.Where(state => string.Equals(state.Id, id)))
+                return state;
+
+            var newItemState = new InfinityCountedItemState(id);
+            InfinityCountedItemStates.Add(newItemState);
             
             return newItemState;
         }
