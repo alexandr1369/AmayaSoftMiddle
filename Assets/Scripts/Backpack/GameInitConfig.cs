@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Backpack
 {
-    [CreateAssetMenu(menuName = "AmayaSoft/Item/New Game Init Config", fileName = "GameInitConfig")]
+    [CreateAssetMenu(menuName = "AmayaSoft/Config/New Game Init Config", fileName = "GameInitConfig")]
     public class GameInitConfig : ScriptableObject
     {
         [field: SerializeField] public List<ItemCount> ItemCounts { get; private set; }

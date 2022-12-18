@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using GameItemSystem;
+using LoadingSystem.Loading.Operations.Home;
 using StateSystem;
 using StateSystem.CounteditemState;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace UI
 {
     public class HudItems : MonoBehaviour
     {
+        [field: SerializeField] public Canvas Canvas { get; private set; }
         [field: SerializeField] private HudItem HudItemPrefab { get; set; }
         [field: SerializeField] private List<GameItem> Items { get; set; }
 
@@ -16,7 +18,11 @@ namespace UI
         private GameController _gameController;
 
         [Inject]
-        private void Construct(GameController gameController) => _gameController = gameController;
+        private void Construct(GameController gameController, HomeSceneLoadingContext context)
+        {
+            _gameController = gameController;
+            context.HudItems = this;
+        }
 
         private void Start() => InitItemsStates();
 

@@ -13,11 +13,7 @@ namespace StateSystem
         private readonly GameStateService _gameStateService;
         private float? _currentSavingDelay;
     
-        public GameController(GameStateService gameStateService, HomeSceneLoadingContext context)
-        {
-            _gameStateService = gameStateService;
-            context.GameController = this;
-        }
+        public GameController(GameStateService gameStateService) => _gameStateService = gameStateService;
 
         public void Save() => _currentSavingDelay = SAVING_DELAY;
     

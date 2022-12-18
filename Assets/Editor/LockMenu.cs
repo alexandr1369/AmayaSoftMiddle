@@ -5,7 +5,7 @@ namespace Editor
 {
     public class LockMenu : EditorWindow
     {
-        [MenuItem("Zorg/Tools/Toggle Inspector Lock %l")] // Ctrl + L
+        [MenuItem("AmayaSoft/Tools/Toggle Inspector Lock %l")] // Ctrl + L
         public static void ToggleInspectorLock()
         {
             var inspectorToBeLocked = mouseOverWindow;

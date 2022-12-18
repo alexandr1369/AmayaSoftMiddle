@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: GameItemCollection
   m_EditorClassIdentifier: 
   <Assets>k__BackingField:
+  - <Name>k__BackingField: EmptyAnimatedDropGroup
+    <Asset>k__BackingField: {fileID: 11400000, guid: 313b72713ced444118e706f7b8f81f22, type: 2}
   - <Name>k__BackingField: LetterA
     <Asset>k__BackingField: {fileID: 11400000, guid: a6c08dc9908c74410ab817842bbad13b, type: 2}
   - <Name>k__BackingField: LetterB
@@ -65,3 +67,5 @@ MonoBehaviour:
     <Asset>k__BackingField: {fileID: 11400000, guid: 3346fd4afb5fa49b0b8b4722ec094b53, type: 2}
   - <Name>k__BackingField: LetterZ
     <Asset>k__BackingField: {fileID: 11400000, guid: f2c44d8ee23284bb2bc7d2c823ee6298, type: 2}
+  - <Name>k__BackingField: RightAnswer
+    <Asset>k__BackingField: {fileID: 11400000, guid: ec7ba887cbc74473bb12fc5c820544f0, type: 2}

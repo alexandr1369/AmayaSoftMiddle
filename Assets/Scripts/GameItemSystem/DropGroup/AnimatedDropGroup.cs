@@ -23,17 +23,11 @@ namespace GameItemSystem.DropGroup
 
         [field: SerializeField] private AnimatedItemFx AnimatedItemFxPrefab { get; set; }
         
-        private HudItems _hudItems;
-        private Inventory _inventory;
         private HomeSceneLoadingContext _context;
 
         [Inject]
-        private void Construct(HudItems hudItems, HomeSceneLoadingContext context)
-        {
-            _hudItems = hudItems;
-            _context = context;
-        }
-        
+        private void Construct(HomeSceneLoadingContext context) => _context = context;
+
         public void Animate(Vector3 startWorldPosition, Transform container)
         {
             if (Items.Count == 1)
@@ -56,7 +50,7 @@ namespace GameItemSystem.DropGroup
                 {
                     var itemCount = item.Count / itemsAmount;
                     var reward = new GameCurrency(item.Item, itemCount);
-                    _inventory.Add(reward);
+                    _context.Inventory.Add(reward);
                 });
         }
 
@@ -72,7 +66,7 @@ namespace GameItemSystem.DropGroup
                 {
                     var itemCount = item.Count;
                     var reward = new GameCurrency(item.Item, itemCount);
-                    _inventory.Add(reward);
+                    _context.Inventory.Add(reward);
                 });
             }
         }
@@ -120,7 +114,7 @@ namespace GameItemSystem.DropGroup
 
         private async UniTask<Transform> GetHudItemTransform(GameItem item)
         {
-            var hudItemTransform = _hudItems.GetItemTransform(item);
+            var hudItemTransform = _context.HudItems.GetItemTransform(item);
 
             if (hudItemTransform.gameObject.activeSelf)
                 return hudItemTransform;

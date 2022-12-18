@@ -1,6 +1,9 @@
 using System;
+using System.Collections.Generic;
+using Backpack;
 using DG.Tweening;
 using GameItemSystem;
+using GameItemSystem.DropGroup;
 using LoadingSystem.Loading.Operations.Home;
 using Location.ConveyorTape.Item.Movement;
 using UnityEngine;
@@ -15,10 +18,13 @@ namespace Location.ConveyorTape.Item
         [field: SerializeField] public ConveyorTapeItemConfig Config { get; private set; }
         [field: SerializeField] public SpriteRenderer SpriteRenderer { get; private set; }
         [field: SerializeField] public AudioSource AudioSource { get; private set; }
+        [field: SerializeField] private List<DropItem> RightAnswerRewards { get; set; }
         
         public LetterItem Item { get; private set; }
         public bool IsBonus { get; private set; }
         
+        private AudioService _audioService;
+        private EmptyAnimatedDropGroup _emptyAnimatedDropGroup;
         private HomeSceneLoadingContext _context;
         private IConveyorTapeItemMovable _moveBehaviour;
         private Sequence _interactionAnimationSequence;
@@ -26,7 +32,15 @@ namespace Location.ConveyorTape.Item
         private Vector2 _collectingScale;
 
         [Inject]
-        private void Construct(HomeSceneLoadingContext context) => _context = context;
+        private void Construct(
+            GameItems gameItems,
+            AudioService audioService,
+            HomeSceneLoadingContext context)
+        {
+            _emptyAnimatedDropGroup = gameItems.GetAsset<EmptyAnimatedDropGroup>();
+            _audioService = audioService;
+            _context = context;
+        }
 
         private void Awake()
         {
@@ -75,9 +89,16 @@ namespace Location.ConveyorTape.Item
             _interactionAnimationSequence.Append(transform.DOMove(targetPosition, Config.CollectAnimationDuration));
             _interactionAnimationSequence.Join(transform.DOScale(Config.CollectAnimationEndScale, 
                 Config.CollectAnimationEndScaleDuration));
-            _interactionAnimationSequence.OnComplete(Collect);
+            _interactionAnimationSequence.OnComplete(OnInteractionAnimationSequenceComplete);
             _interactionAnimationSequence.Play();
-            _context.AudioService.PlayLocalFx(AudioSource, _context.AudioService.InteractionClip);
+            _audioService.PlayLocalFx(AudioSource, _audioService.InteractionClip);
+        }
+
+        private void OnInteractionAnimationSequenceComplete()
+        {
+            _emptyAnimatedDropGroup.Init(RightAnswerRewards);
+            _emptyAnimatedDropGroup.Animate(transform.position, _context.HudItems.Canvas.transform);
+            Collect();
         }
         
         public void Collect()

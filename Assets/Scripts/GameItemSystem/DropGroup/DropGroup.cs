@@ -15,5 +15,11 @@ namespace GameItemSystem.DropGroup
     {
         [field: SerializeField] public GameItem Item { get; set; }   
         [field: SerializeField] public int Count { get; set; }
+
+        public DropItem(GameItem item, int count)
+        {
+            Item = item;
+            Count = count;
+        }
     }
 }
