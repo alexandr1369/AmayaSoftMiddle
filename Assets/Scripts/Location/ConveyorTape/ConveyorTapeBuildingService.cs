@@ -1,3 +1,4 @@
+using LoadingSystem.Loading.Operations.Home;
 using UnityEngine;
 using Zenject;
 
@@ -7,13 +8,13 @@ namespace Location.ConveyorTape
     {
         [field: SerializeField] private ConveyorTapeBuildingServiceConfig Config { get; set; }
 
-        private Camera _homeSceneCamera;
+        private HomeSceneLoadingContext _context;
         private ConveyorTape _conveyorTape;
         
         [Inject]
-        private void Construct(Camera homeSceneCamera, ConveyorTape conveyorTape)
+        private void Construct(HomeSceneLoadingContext context, ConveyorTape conveyorTape)
         {
-            _homeSceneCamera = homeSceneCamera;
+            _context = context;
             _conveyorTape = conveyorTape;
         }
 
@@ -34,8 +35,8 @@ namespace Location.ConveyorTape
             Debug.Log($"[Conveyor Tape Building Service] Part size: {tapePartSize}");
             
             var tapePartPositionOy = Config.StartPointOy;
-            var startPoint = (Vector2)_homeSceneCamera.ViewportToWorldPoint(Vector2.zero);
-            var endPoint = (Vector2)_homeSceneCamera.ViewportToWorldPoint(Vector2.one);
+            var startPoint = (Vector2)_context.HomeSceneCamera.ViewportToWorldPoint(Vector2.zero);
+            var endPoint = (Vector2)_context.HomeSceneCamera.ViewportToWorldPoint(Vector2.one);
             var bottomTriggerPoint = new Vector2(0, startPoint.y) + Config.TapeItemBottomTriggerOffset;
             startPoint.y = endPoint.y = tapePartPositionOy;
             var conveyorTapeStartPoint = endPoint + Config.TapeItemSpawnPointOffset;

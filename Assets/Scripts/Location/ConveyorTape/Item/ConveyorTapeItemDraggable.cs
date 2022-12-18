@@ -1,3 +1,4 @@
+using LoadingSystem.Loading.Operations.Home;
 using Location.Character;
 using Location.ConveyorTape.Item.Movement;
 using UnityEngine;
@@ -10,15 +11,15 @@ namespace Location.ConveyorTape.Item
     {
         [field: SerializeField] private ConveyorTapeItem Item { get; set; }
         
-        private Camera _homeSceneCamera;
+        private HomeSceneLoadingContext _context;
         private CharactersInteractService _service;
         private Vector3? _pointerPosition;
         private int _normalOrderInLayer;
 
         [Inject]
-        private void Construct(Camera homeSceneCamera, CharactersInteractService service)
+        private void Construct(HomeSceneLoadingContext context, CharactersInteractService service)
         {
-            _homeSceneCamera = homeSceneCamera;
+            _context = context;
             _service = service;
         }
 
@@ -42,7 +43,7 @@ namespace Location.ConveyorTape.Item
         }
 
         public void OnDrag(PointerEventData eventData) => 
-            _pointerPosition = _homeSceneCamera.ScreenToWorldPoint(eventData.position);
+            _pointerPosition = _context.HomeSceneCamera.ScreenToWorldPoint(eventData.position);
 
         public void OnEndDrag(PointerEventData eventData)
         {
