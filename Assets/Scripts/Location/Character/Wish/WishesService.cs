@@ -30,7 +30,7 @@ namespace Location.Character.Wish
         }
 
         /// <summary>
-        /// Wishes can't be repeated with current active ones in clouds.
+        /// Wishes can't be repeated with current active ones in characters' clouds.
         /// </summary>
         /// <returns>Non-recurring wish.</returns>
         private LetterItem GetAvailableItem()

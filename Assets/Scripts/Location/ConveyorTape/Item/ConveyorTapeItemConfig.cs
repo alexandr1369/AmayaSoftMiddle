@@ -6,7 +6,7 @@ namespace Location.ConveyorTape.Item
     public class ConveyorTapeItemConfig : ScriptableObject
     {
         [field: SerializeField] public Sprite BonusSprite { get; private set; }
-        [field: SerializeField] public Vector2 TapeVelocity { get; set; }
+        [field: SerializeField] public Vector2 TapeVelocity { get; private set; }
         [field: SerializeField] public Vector2 FallingVelocity { get; private set; }
         [field: SerializeField] public float DraggingVelocity { get; private set; }
         [field: SerializeField] public int DraggingOrderInLayer { get; private set; }

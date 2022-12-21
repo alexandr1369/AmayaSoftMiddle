@@ -6,10 +6,11 @@ namespace Utils
 {
     public abstract class Pool<T> : MonoBehaviour where T : MonoBehaviour
     {
-        private DiContainer _diContainer;
         [field: SerializeField] protected T Item { get; private set; }
         [field: SerializeField] protected int Count { get; private set; }
 
+        private DiContainer _diContainer;
+        
         [Inject]
         private void Construct(DiContainer diContainer) => _diContainer = diContainer;
 

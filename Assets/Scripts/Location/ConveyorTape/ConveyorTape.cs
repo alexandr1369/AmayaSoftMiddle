@@ -60,7 +60,6 @@ namespace Location.ConveyorTape
         {
             var item = _factory.Create();
             item.transform.position = _startPoint;
-            
             var letterItems = _gameItems.GetAssets<LetterItem>();
             var randomLetter = letterItems[Random.Range(0, letterItems.Count)];
             var isRightAnswer = _wishesService.IsRightAnswer(randomLetter);

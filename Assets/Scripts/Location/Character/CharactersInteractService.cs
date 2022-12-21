@@ -34,6 +34,6 @@ namespace Location.Character
             _characters.Add(character);   
         }
 
-        public void Remove(Character character) => _characters.Add(character);
+        public void Remove(Character character) => _characters.Remove(character);
     }
 }

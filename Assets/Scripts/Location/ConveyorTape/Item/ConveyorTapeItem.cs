@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Backpack;
 using DG.Tweening;
 using GameItemSystem;
 using GameItemSystem.DropGroup;
