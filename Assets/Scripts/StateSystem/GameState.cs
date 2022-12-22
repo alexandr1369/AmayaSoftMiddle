@@ -17,7 +17,7 @@ namespace StateSystem
         [field: SerializeField] public List<AwaitingItemState> AwaitingItemStates { get; private set; }
 
         /// <summary>
-        /// Самая первая инициализация игрового стейта (вызывается единожды после сбрасывания).
+        /// The very first game state initialization (is called per once after reset).
         /// </summary>
         public GameState()
         {

@@ -22,7 +22,7 @@ namespace Editor.Tests
         public void WhenStartingConveyorTape_ThenItShouldBeActive()
         {
             // Arrange
-            var conveyorTape = Setup.Tape();
+            var conveyorTape = Create.Tape();
 
             // Act
             conveyorTape.StartConveyorTape();
@@ -35,7 +35,7 @@ namespace Editor.Tests
         public void WhenDraggingConveyorTapeItemDraggable_AndContextIsNull_ThenPointerPositionShouldBeNull()
         {
             // Arrange
-            var itemDraggable = Setup.ItemDraggable();
+            var itemDraggable = Create.ItemDraggable();
 
             // Act
             itemDraggable.Context = null;

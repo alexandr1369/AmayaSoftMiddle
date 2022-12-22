@@ -8,28 +8,30 @@ using Random = UnityEngine.Random;
 
 public class AudioService : MonoBehaviour
 {
-    [field: SerializeField] private AudioSource MusicAudioSource { get; set; }
-    [field: SerializeField] private AudioSource SoundAudioSource { get; set; }
+    [field: SerializeField] public AudioSource MusicAudioSource { get; set; }
+    [field: SerializeField] public AudioSource SoundAudioSource { get; set; }
 
     [field: Header("Clips")]
-    [field: SerializeField] public AudioClip HomeMusic1Clip { get; private set; }
-    [field: SerializeField] public AudioClip HomeMusic2Clip { get; private set; }
-    [field: SerializeField] public AudioClip ClickClip { get; private set; }
-    [field: SerializeField] public AudioClip InteractionClip { get; private set; }
+    [field: SerializeField] public AudioClip HomeMusic1Clip { get; set; }
+    [field: SerializeField] public AudioClip HomeMusic2Clip { get; set; }
+    [field: SerializeField] public AudioClip ClickClip { get; set; }
+    [field: SerializeField] public AudioClip InteractionClip { get; set; }
 
+    public IGameController GameController { get; set; }
+    public IGameSettings GameSettings { get; set; }
     public bool IsMusicEnabled { get; private set; }
     public bool IsSoundEnabled { get; private set; }
-
-    private GameController _gameController;
-    private GameSettings _gameSettings;
     
     [Inject]
-    private void Construct(GameController gameController, HomeSceneLoadingContext context)
+    public void Construct(
+        GameController gameController,
+        HomeSceneLoadingContext context,
+        IGameSettings gameSettings = null)
     {
-        _gameController = gameController;
-        _gameSettings = _gameController.State.UserState.GameSettings;
-        IsSoundEnabled = _gameSettings.IsSoundEnabled;
-        IsMusicEnabled = _gameSettings.IsMusicEnabled;
+        GameController = gameController;
+        GameSettings = gameSettings ?? gameController.State.UserState.GameSettings;
+        IsSoundEnabled = GameSettings.IsSoundEnabled;
+        IsMusicEnabled = GameSettings.IsMusicEnabled;
         context.AudioService = this;
     }
 
@@ -78,8 +80,8 @@ public class AudioService : MonoBehaviour
     public void SetMusicVolume(bool state)
     {
         IsMusicEnabled = state;
-        _gameSettings.IsMusicEnabled = IsMusicEnabled;
-        _gameController.Save();
+        GameSettings.IsMusicEnabled = IsMusicEnabled;
+        GameController.Save();
 
         if(!IsMusicEnabled && MusicAudioSource.isPlaying)
             MusicAudioSource.Stop();
@@ -90,8 +92,8 @@ public class AudioService : MonoBehaviour
     public void SetSoundVolume(bool state)
     {
         IsSoundEnabled = state;
-        _gameSettings.IsSoundEnabled = IsSoundEnabled;
-        _gameController.Save();
+        GameSettings.IsSoundEnabled = IsSoundEnabled;
+        GameController.Save();
     }
 
     public void PreloadHomeAudio()
