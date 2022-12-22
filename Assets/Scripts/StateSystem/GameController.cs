@@ -1,18 +1,18 @@
-﻿using LoadingSystem.Loading.Operations.Home;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 namespace StateSystem
 {
-    public class GameController : ITickable
+    public class GameController : IGameController, ITickable
     {
         private const float SAVING_DELAY = .1f;
     
         public GameState State => _gameStateService?.State;
-    
+        
         private readonly GameStateService _gameStateService;
+
         private float? _currentSavingDelay;
-    
+
         public GameController(GameStateService gameStateService) => _gameStateService = gameStateService;
 
         public void Save() => _currentSavingDelay = SAVING_DELAY;
@@ -32,5 +32,12 @@ namespace StateSystem
             _currentSavingDelay = null;
             _gameStateService.Save();
         }
+    }
+
+    public interface IGameController
+    {
+        GameState State { get; }
+        void Save();
+        void ClearState();
     }
 }

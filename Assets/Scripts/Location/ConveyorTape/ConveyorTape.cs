@@ -12,14 +12,14 @@ namespace Location.ConveyorTape
     {
         [field: SerializeField] public ConveyorTapeConfig Config { get; private set; }
         
+        public bool IsActive { get; private set; }
+        
         private GameItems _gameItems;
         private WishesService _wishesService;
         private Utils.IFactory<ConveyorTapeItem> _factory;
         private Vector3 _startPoint;
         private float _spawningDelay;
         private int _currentIncorrectAnswersInARow;
-        
-        public bool IsActive { get; private set; }
 
         [Inject]
         private void Construct(
