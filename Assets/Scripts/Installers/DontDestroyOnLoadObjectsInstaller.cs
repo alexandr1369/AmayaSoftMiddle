@@ -25,7 +25,7 @@ namespace Installers
 
         private void BindAudioService()
         {
-            Container.Bind<AudioService>()
+            Container.BindInterfacesAndSelfTo<AudioService>()
                 .FromComponentOn(_audioService.gameObject)
                 .AsSingle();
         }
