@@ -22,7 +22,7 @@ namespace Location.ConveyorTape.Item
         public LetterItem Item { get; private set; }
         public bool IsBonus { get; private set; }
         
-        private AudioService _audioService;
+        private IAudioService _audioService;
         private EmptyAnimatedDropGroup _emptyAnimatedDropGroup;
         private HomeSceneLoadingContext _context;
         private IConveyorTapeItemMovable _moveBehaviour;
@@ -31,9 +31,9 @@ namespace Location.ConveyorTape.Item
         private Vector2 _collectingScale;
 
         [Inject]
-        private void Construct(
+        public void Construct(
             GameItems gameItems,
-            AudioService audioService,
+            IAudioService audioService,
             HomeSceneLoadingContext context)
         {
             _emptyAnimatedDropGroup = gameItems.GetAsset<EmptyAnimatedDropGroup>();

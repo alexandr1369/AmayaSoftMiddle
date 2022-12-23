@@ -37,6 +37,15 @@ namespace Editor.Tests
             return audioService;
         }
 
+        public static IAudioService AudioServiceInterface()
+        {
+            var audioService = Substitute.For<IAudioService>();
+            var audioClip = Create.AudioClip();
+            audioService.InteractionClip.Returns(audioClip);
+
+            return audioService;
+        }
+
         public static IGameController GameController()
         {
             var gameController = Substitute.For<IGameController>();

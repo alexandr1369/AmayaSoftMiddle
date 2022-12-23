@@ -1,3 +1,4 @@
+using GameItemSystem;
 using Location.ConveyorTape;
 using Location.ConveyorTape.Item;
 using UnityEngine;
@@ -9,6 +10,8 @@ namespace Editor.Tests
         public static AudioSource AudioSource() => new GameObject().AddComponent<AudioSource>();
 
         public static AudioClip AudioClip() => Resources.Load<AudioClip>("Audio/Click");
+        
+        public static GameItems GameItems() => Resources.Load<GameItems>("RuntimeAssets/GameItemCollection");
         
         public static ConveyorTape Tape() => new GameObject().AddComponent<ConveyorTape>();
 

@@ -1,5 +1,6 @@
 using FluentAssertions;
 using LoadingSystem.Loading.Operations.Home;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace Editor.Tests
@@ -118,6 +119,24 @@ namespace Editor.Tests
             
             // Assert
             homeSceneLoadingContext.AudioService.Should().NotBe(null);
+        }
+
+        [Test]
+        public void WhenPlayingLocalFxFor3Times_ThenPlayedLocalFxCountShouldBe4_5_6()
+        {
+            // Arrange
+            var audioService = Substitute.For<IAudioService>();
+            audioService.PlayedLocalFxCount.Returns(3, 4, 5);
+
+            // Act
+            var played1 = audioService.PlayedLocalFxCount + 1;
+            var played2 = audioService.PlayedLocalFxCount + 1;
+            var played3 = audioService.PlayedLocalFxCount + 1;
+
+            // Assert
+            played1.Should().Be(4);
+            played2.Should().Be(5);
+            played3.Should().Be(6);
         }
     }
 }

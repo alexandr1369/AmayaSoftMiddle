@@ -6,7 +6,7 @@ using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
 
-public class AudioService : MonoBehaviour
+public class AudioService : MonoBehaviour, IAudioService
 {
     [field: SerializeField] public AudioSource MusicAudioSource { get; set; }
     [field: SerializeField] public AudioSource SoundAudioSource { get; set; }
@@ -16,9 +16,10 @@ public class AudioService : MonoBehaviour
     [field: SerializeField] public AudioClip HomeMusic2Clip { get; set; }
     [field: SerializeField] public AudioClip ClickClip { get; set; }
     [field: SerializeField] public AudioClip InteractionClip { get; set; }
-
+    
     public IGameController GameController { get; set; }
     public IGameSettings GameSettings { get; set; }
+    public int PlayedLocalFxCount { get; set; }
     public bool IsMusicEnabled { get; private set; }
     public bool IsSoundEnabled { get; private set; }
     
@@ -58,6 +59,8 @@ public class AudioService : MonoBehaviour
         source.Stop();
         source.clip = clip;
         source.Play();
+        
+        PlayedLocalFxCount++;
     }
     
     public void StopLocalFx(AudioSource source) => source.Stop();
@@ -98,4 +101,13 @@ public class AudioService : MonoBehaviour
         ClickClip.LoadAudioData();
         InteractionClip.LoadAudioData();
     }
+}
+
+public interface IAudioService
+{
+    AudioClip InteractionClip { get; }
+    int PlayedLocalFxCount { get; }
+    void PlayLocalFx(AudioSource source, AudioClip clip);
+    void StopLocalFx(AudioSource source);
+    void PlayGlobalFx(AudioClip clip);
 }
