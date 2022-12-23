@@ -23,18 +23,15 @@ public class AudioService : MonoBehaviour
     public bool IsSoundEnabled { get; private set; }
     
     [Inject]
-    public void Construct(
-        GameController gameController,
-        HomeSceneLoadingContext context,
-        IGameSettings gameSettings = null)
+    public void Construct(IGameController gameController, HomeSceneLoadingContext context)
     {
         GameController = gameController;
-        GameSettings = gameSettings ?? gameController.State.UserState.GameSettings;
+        GameSettings = GameController.State.UserState.GameSettings;
         IsSoundEnabled = GameSettings.IsSoundEnabled;
         IsMusicEnabled = GameSettings.IsMusicEnabled;
         context.AudioService = this;
     }
-
+    
     public void PlayHomeMusic()
     {
         if ((MusicAudioSource.clip == HomeMusic1Clip || MusicAudioSource.clip == HomeMusic2Clip)

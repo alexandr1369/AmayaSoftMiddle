@@ -15,10 +15,10 @@ namespace UI
         [field: SerializeField] private List<GameItem> Items { get; set; }
 
         private readonly List<HudItem> _hudItems = new();
-        private GameController _gameController;
+        private IGameController _gameController;
 
         [Inject]
-        private void Construct(GameController gameController, HomeSceneLoadingContext context)
+        private void Construct(IGameController gameController, HomeSceneLoadingContext context)
         {
             _gameController = gameController;
             context.HudItems = this;

@@ -11,14 +11,14 @@ namespace Backpack
 {
     public class Inventory : IInitializable, IDisposable, ISceneLoadingListener
     {
-        private GameController _gameController;
+        private IGameController _gameController;
         private InventoryState _inventoryState;
         private GameInitConfig _gameInitConfig;
         private HomeSceneLoadingContext _context;
 
         [Inject]
         private void Construct(
-            GameController gameController,
+            IGameController gameController,
             GameInitConfig gameInitConfig,
             HomeSceneLoadingContext context)
         {

@@ -1,9 +1,6 @@
 using FluentAssertions;
 using LoadingSystem.Loading.Operations.Home;
-using NSubstitute.ReceivedExtensions;
 using NUnit.Framework;
-using StateSystem;
-using StateSystem.UserState;
 
 namespace Editor.Tests
 {
@@ -115,13 +112,9 @@ namespace Editor.Tests
             var audioService = Setup.AudioService();
             var gameController = Setup.GameController();
             var homeSceneLoadingContext = new HomeSceneLoadingContext();
-            var gameSettings = new GameSettings();
             
             // Act
-            audioService.Construct(
-                gameController as GameController,
-                homeSceneLoadingContext,
-                gameSettings);
+            audioService.Construct(gameController, homeSceneLoadingContext);
             
             // Assert
             homeSceneLoadingContext.AudioService.Should().NotBe(null);

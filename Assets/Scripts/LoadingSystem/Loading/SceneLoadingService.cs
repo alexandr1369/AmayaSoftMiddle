@@ -22,7 +22,7 @@ namespace LoadingSystem.Loading
         public bool LoadingInProgress { get; private set; }
         
         private readonly List<ISceneLoadingListener> _listeners = new();
-        private GameController _gameController;
+        private IGameController _gameController;
         private UserState _userState;
         private InputDelegate _inputDelegate;
         private HomeSceneLoadingContext _context;
@@ -30,7 +30,7 @@ namespace LoadingSystem.Loading
 
         [Inject]
         private void Construct(
-            GameController gameController,  
+            IGameController gameController,  
             InputDelegate inputDelegate,
             HomeSceneLoadingContext context)
         {
