@@ -1,6 +1,7 @@
 using Location.ConveyorTape;
 using Location.ConveyorTape.Item;
 using UnityEngine;
+using Utils;
 using Zenject;
 
 namespace Installers
@@ -19,21 +20,23 @@ namespace Installers
 
         private void BindPool()
         {
-            Container.Bind<ConveyorTapeItemsPool>()
+            Container.Bind<Pool<ConveyorTapeItem>>()
+                .To<ConveyorTapeItemsPool>()
                 .FromInstance(ItemsPool)
                 .AsSingle();
         }
 
         private void BindFactory()
         {
-            Container.Bind<Utils.IFactory<ConveyorTapeItem>>()
+            Container.Bind<Utils.IFactory<IConveyorTapeItem>>()
                 .To<ConveyorTapeItemsFactory>()
                 .AsSingle();
         }
 
         private void BindConveyorTape()
         {
-            Container.Bind<ConveyorTape>()
+            Container.Bind<IConveyorTape>()
+                .To<ConveyorTape>()
                 .FromInstance(ConveyorTape)
                 .AsSingle();
         }

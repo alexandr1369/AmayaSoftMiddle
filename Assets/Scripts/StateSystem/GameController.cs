@@ -9,11 +9,11 @@ namespace StateSystem
     
         public GameState State => _gameStateService?.State;
         
-        private readonly GameStateService _gameStateService;
+        private readonly IGameStateService _gameStateService;
 
         private float? _currentSavingDelay;
 
-        public GameController(GameStateService gameStateService) => _gameStateService = gameStateService;
+        public GameController(IGameStateService gameStateService) => _gameStateService = gameStateService;
 
         public void Save() => _currentSavingDelay = SAVING_DELAY;
     

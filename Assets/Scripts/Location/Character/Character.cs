@@ -12,11 +12,11 @@ namespace Location.Character
         
         public Wish.Wish Wish { get; private set; }
         
-        private CharactersInteractService _interactService;
+        private ICharactersInteractService _interactService;
         private WishesService _wishesService;
         
         [Inject]
-        private void Construct(CharactersInteractService interactService, WishesService wishesService)
+        private void Construct(ICharactersInteractService interactService, WishesService wishesService)
         {
             _interactService = interactService;
             _wishesService = wishesService;

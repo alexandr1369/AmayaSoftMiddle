@@ -10,7 +10,8 @@ namespace Installers
 
         public override void InstallBindings()
         {
-            Container.Bind<CharactersInteractService>()
+            Container.Bind<ICharactersInteractService>()
+                .To<CharactersInteractService>()
                 .FromInstance(Service)
                 .AsSingle();
         }

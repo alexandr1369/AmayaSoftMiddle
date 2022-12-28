@@ -6,12 +6,14 @@ namespace Installers
 {
     public class SceneLoadingServiceInstaller : MonoInstaller
     {
-        [field: SerializeField] private SceneLoadingService SceneLoadingService { get; set; }
+        [field: SerializeField] private SceneLoadingService SceneLoadingServicePrefab { get; set; }
 
         public override void InstallBindings()
         {
+            var service = Container.InstantiatePrefabForComponent<SceneLoadingService>(SceneLoadingServicePrefab);
+            
             Container.Bind<SceneLoadingService>()
-                .FromInstance(SceneLoadingService)
+                .FromComponentsOn(service.gameObject)
                 .AsSingle(); 
         }
     }

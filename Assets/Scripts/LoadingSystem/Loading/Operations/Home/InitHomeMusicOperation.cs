@@ -4,9 +4,9 @@ namespace LoadingSystem.Loading.Operations.Home
 {
     public class InitHomeMusicOperation : LoadingOperation
     {
-        private readonly AudioService _audioService;
+        private readonly IAudioService _audioService;
         
-        public InitHomeMusicOperation(AudioService audioService) => _audioService = audioService;
+        public InitHomeMusicOperation(IAudioService audioService) => _audioService = audioService;
 
         public override async UniTask Load()
         {

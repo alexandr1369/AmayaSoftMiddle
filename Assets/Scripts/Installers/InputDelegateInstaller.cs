@@ -8,7 +8,8 @@ namespace Installers
         public override void InstallBindings()
         {
             Container
-                .Bind<InputDelegate>()
+                .Bind<IInputDelegate>()
+                .To<InputDelegate>()
                 .AsSingle();
         }
     }

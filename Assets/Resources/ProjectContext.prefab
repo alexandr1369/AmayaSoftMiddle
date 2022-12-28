@@ -177,6 +177,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <GameInitConfig>k__BackingField: {fileID: 11400000, guid: a8e24ff03d82e4c18b5078a02725cca5, type: 2}
+--- !u!1 &5547239769885323153
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8668129333406273578}
+  - component: {fileID: 7652544508697404895}
+  m_Layer: 0
+  m_Name: SceneLoadingServiceInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8668129333406273578
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547239769885323153}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1763330153584320197}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7652544508697404895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547239769885323153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b32b91e6791464a8da5f9e94466485f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <SceneLoadingServicePrefab>k__BackingField: {fileID: 8077979422454347413, guid: f236955241feb4344932cab3b7363f1c, type: 3}
 --- !u!1 &7633217372875649776
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,6 +301,7 @@ Transform:
   - {fileID: 2900699781042323444}
   - {fileID: 4613569652899793443}
   - {fileID: 4639745023454505819}
+  - {fileID: 8668129333406273578}
   - {fileID: 40127210360935224}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -281,6 +327,7 @@ MonoBehaviour:
   - {fileID: 7259390215266598353}
   - {fileID: 5191549802179111028}
   - {fileID: 7320856266632332161}
+  - {fileID: 7652544508697404895}
   - {fileID: 4975928508062509667}
   _installerPrefabs: []
   _parentNewObjectsUnderContext: 1

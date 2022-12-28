@@ -1,15 +1,16 @@
+using Utils;
 using Zenject;
 
 namespace Location.ConveyorTape.Item
 {
-    public class ConveyorTapeItemsFactory : Utils.IFactory<ConveyorTapeItem>
+    public class ConveyorTapeItemsFactory : Utils.IFactory<IConveyorTapeItem>
     {
-        private ConveyorTapeItemsPool _pool;
+        private Pool<ConveyorTapeItem> _pool;
         
         [Inject]
-        private void Construct(ConveyorTapeItemsPool pool) => _pool = pool;
+        private void Construct(Pool<ConveyorTapeItem> pool) => _pool = pool;
 
-        public ConveyorTapeItem Create()
+        public IConveyorTapeItem Create()
         {
             var item = _pool.Spawn();
             item.OnCollected += () => _pool.Despawn(item);

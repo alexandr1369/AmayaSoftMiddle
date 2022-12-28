@@ -9,10 +9,10 @@ namespace Location.ConveyorTape
         [field: SerializeField] private ConveyorTapeBuildingServiceConfig Config { get; set; }
 
         private HomeSceneLoadingContext _context;
-        private ConveyorTape _conveyorTape;
+        private IConveyorTape _conveyorTape;
         
         [Inject]
-        private void Construct(ConveyorTape conveyorTape, HomeSceneLoadingContext context)
+        private void Construct(IConveyorTape conveyorTape, HomeSceneLoadingContext context)
         {
             _conveyorTape = conveyorTape;
             _context = context;

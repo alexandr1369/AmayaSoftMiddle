@@ -6,15 +6,8 @@ using Utils.Serialization;
 
 namespace StateSystem
 {
-    public class GameStateService
+    public class GameStateService : IGameStateService
     {
-        private const string SAVE_FILE_NAME = "State";
-
-        public static readonly string SaveFile = $"{Application.persistentDataPath}/{SAVE_FILE_NAME}.save";
-        public static readonly string BackupFile = $"{Application.persistentDataPath}/{SAVE_FILE_NAME}.backup";
-        
-        private static readonly string TempFile = $"{Application.persistentDataPath}/{SAVE_FILE_NAME}.tmp"; 
-
         public GameState State
         {
             get
@@ -32,17 +25,17 @@ namespace StateSystem
 
         public void Save()
         {
-            Save(TempFile);
+            Save(IGameStateService.TempFile);
 
-            if (File.Exists(SaveFile))
+            if (File.Exists(IGameStateService.SaveFile))
             {
-                File.Delete(BackupFile);
-                File.Move(SaveFile, BackupFile);
-                File.Delete(SaveFile);
+                File.Delete(IGameStateService.BackupFile);
+                File.Move(IGameStateService.SaveFile, IGameStateService.BackupFile);
+                File.Delete(IGameStateService.SaveFile);
             }
             
-            File.Move(TempFile, SaveFile);
-            File.Delete(TempFile);
+            File.Move(IGameStateService.TempFile, IGameStateService.SaveFile);
+            File.Delete(IGameStateService.TempFile);
         }
         
         private void Save(string path)
@@ -71,10 +64,10 @@ namespace StateSystem
 
         private void LoadAnyState()
         {
-            LoadWithPath(SaveFile);
+            LoadWithPath(IGameStateService.SaveFile);
 
             if (_state == null) 
-                LoadWithPath(BackupFile);
+                LoadWithPath(IGameStateService.BackupFile);
 
             if (_state != null)
                 return;
@@ -95,14 +88,14 @@ namespace StateSystem
                 directory.Delete(true);
         }
 
-        internal void ClearState()
+        void IGameStateService.ClearState()
         {
-            var path = SaveFile;
+            var path = IGameStateService.SaveFile;
             
             if (File.Exists(path)) 
                 File.Delete(path);
 
-            path = BackupFile;
+            path = IGameStateService.BackupFile;
             
             if (File.Exists(path)) 
                 File.Delete(path);
@@ -137,5 +130,18 @@ namespace StateSystem
                 fs?.Close();
             }
         }
+    }
+
+    public interface IGameStateService
+    {
+        protected const string SAVE_FILE_NAME = "State";
+        
+        public static readonly string SaveFile = $"{Application.persistentDataPath}/{SAVE_FILE_NAME}.save";
+        public static readonly string BackupFile = $"{Application.persistentDataPath}/{SAVE_FILE_NAME}.backup";
+        protected static readonly string TempFile = $"{Application.persistentDataPath}/{SAVE_FILE_NAME}.tmp"; 
+        
+        GameState State { get; }
+        void Save();
+        internal void ClearState();
     }
 }

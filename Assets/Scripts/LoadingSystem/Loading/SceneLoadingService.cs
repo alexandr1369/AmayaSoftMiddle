@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using LoadingSystem.Loading.Operations;
 using LoadingSystem.Loading.Operations.Home;
@@ -15,23 +16,24 @@ namespace LoadingSystem.Loading
     [RequireComponent(typeof(CanvasGroup))]
     public class SceneLoadingService : MonoBehaviour
     {
-        private static readonly InputDelegate.InputRestriction ActionsRestriction = _ => false;
+        private static readonly IInputDelegate.InputRestriction ActionsRestriction = _ => false;
 
+        [field: SerializeField] private CanvasGroup CanvasGroup { get; set; }
         [field: SerializeField] private LoadingProgress ProgressBar { get; set; }
         
         public bool LoadingInProgress { get; private set; }
         
         private readonly List<ISceneLoadingListener> _listeners = new();
+        private readonly CancellationTokenSource _destroyCts = new();
         private IGameController _gameController;
         private UserState _userState;
-        private InputDelegate _inputDelegate;
+        private IInputDelegate _inputDelegate;
         private HomeSceneLoadingContext _context;
-        private CanvasGroup _canvasGroup;
 
         [Inject]
         private void Construct(
             IGameController gameController,  
-            InputDelegate inputDelegate,
+            IInputDelegate inputDelegate,
             HomeSceneLoadingContext context)
         {
             _gameController = gameController;
@@ -43,8 +45,7 @@ namespace LoadingSystem.Loading
 
         private void Awake()
         {
-            _canvasGroup = GetComponent<CanvasGroup>();
-            _canvasGroup.alpha = 1f;
+            CanvasGroup.alpha = 1f;
             DontDestroyOnLoad(gameObject);
 
             ChangeLocation(_userState.CurrentLocation, true);
@@ -65,7 +66,7 @@ namespace LoadingSystem.Loading
             _gameController.State.UserState.SetLocation(location);
             _gameController.Save();
             
-            var rootSequence = new RootLoadingSequence(_canvasGroup);
+            var rootSequence = new RootLoadingSequence(CanvasGroup);
             
             if (initial) 
                 rootSequence.Add(new GameStartLoadingSequence());
@@ -91,15 +92,23 @@ namespace LoadingSystem.Loading
         private async void DoLoad(RootLoadingSequence sequence)
         {
             var loadingSequenceTask = sequence.Load();
-            
-            while(!loadingSequenceTask.Status.IsCompleted())
+
+            try
             {
-                var progressValue = sequence.Progress();
+                while (!loadingSequenceTask.Status.IsCompleted())
+                {
+                    var progressValue = sequence.Progress();
 
-                if (ProgressBar) 
-                    ProgressBar.SetProgress(progressValue);
-
-                await UniTask.Yield();
+                    if (ProgressBar)
+                        ProgressBar.SetProgress(progressValue);
+                    
+                    await UniTask.Yield(cancellationToken: _destroyCts.Token);
+                }
+            }
+            catch
+            {
+                Debug.Log("[Scene Loading Service] Scene loading has been cancelled.");
+                return;
             }
             
             gameObject.SetActive(false);
@@ -133,6 +142,12 @@ namespace LoadingSystem.Loading
         {
             foreach (var listener in _listeners) 
                 notification.Invoke(listener);
+        }
+
+        private void OnDestroy()
+        {
+            _destroyCts?.Cancel();
+            _destroyCts?.Dispose();
         }
     }
     

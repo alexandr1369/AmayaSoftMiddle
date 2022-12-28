@@ -7,7 +7,8 @@ namespace Installers
     {
         public override void InstallBindings()
         {
-            Container.Bind<GameStateService>()
+            Container.Bind<IGameStateService>()
+                .To<GameStateService>()
                 .AsSingle();
             
             Container.BindInterfacesAndSelfTo<GameController>()

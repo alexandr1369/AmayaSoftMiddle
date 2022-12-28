@@ -1,5 +1,6 @@
 using Location.Character.Wish;
 using UnityEngine;
+using Utils;
 using Zenject;
 
 namespace Installers
@@ -17,7 +18,8 @@ namespace Installers
 
         private void BindPool()
         {
-            Container.Bind<WishesPool>()
+            Container.Bind<Pool<Wish>>()
+                .To<WishesPool>()
                 .FromInstance(WishesPool)
                 .AsSingle();
         }

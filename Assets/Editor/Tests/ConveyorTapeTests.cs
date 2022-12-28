@@ -1,5 +1,6 @@
 using FluentAssertions;
 using LoadingSystem.Loading.Operations.Home;
+using Location.ConveyorTape.Item;
 using NSubstitute;
 using NUnit.Framework;
 using UnityEngine;
@@ -56,7 +57,7 @@ namespace Editor.Tests
             var audioService = Setup.AudioServiceInterface();
             var gameItems = Create.GameItems();
             var homeSceneContext = new HomeSceneLoadingContext();
-            conveyorTapeItem.Construct(
+            ((ConveyorTapeItem)conveyorTapeItem).Construct(
                 gameItems,
                 audioService, 
                 homeSceneContext);
@@ -78,7 +79,7 @@ namespace Editor.Tests
             var audioService = Setup.AudioServiceInterface();
             var gameItems = Create.GameItems();
             var homeSceneContext = new HomeSceneLoadingContext();
-            conveyorTapeItem.Construct(
+            ((ConveyorTapeItem)conveyorTapeItem).Construct(
                 gameItems,
                 audioService, 
                 homeSceneContext);

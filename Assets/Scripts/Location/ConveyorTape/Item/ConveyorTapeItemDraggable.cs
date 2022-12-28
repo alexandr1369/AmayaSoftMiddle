@@ -15,15 +15,15 @@ namespace Location.ConveyorTape.Item
         public HomeSceneLoadingContext Context { get; set; }
         public Vector3? PointerPosition { get; private set; }
         
-        private InputDelegate _inputDelegate;
-        private CharactersInteractService _service;
+        private IInputDelegate _inputDelegate;
+        private ICharactersInteractService _service;
         private int _normalOrderInLayer;
 
         [Inject]
         private void Construct(
             HomeSceneLoadingContext context,
-            InputDelegate inputDelegate,
-            CharactersInteractService service)
+            IInputDelegate inputDelegate,
+            ICharactersInteractService service)
         {
             Context = context;
             _inputDelegate = inputDelegate;

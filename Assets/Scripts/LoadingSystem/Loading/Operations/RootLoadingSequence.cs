@@ -15,18 +15,25 @@ namespace LoadingSystem.Loading.Operations
 
         public override async UniTask Load()
         {
-            if (_loadingInProgress)
-                return;
+            try
+            {
+                if (_loadingInProgress)
+                    return;
 
-            _loadingInProgress = true;
+                _loadingInProgress = true;
 
-            await ShowLoadingScreen();
+                await ShowLoadingScreen();
 
-            await base.Load();
+                await base.Load();
 
-            await HideLoadingScreen();
-            
-            _loadingInProgress = false;
+                await HideLoadingScreen();
+
+                _loadingInProgress = false;
+            }
+            catch
+            {
+                Debug.Log("Root Loading Sequence] Loading has been cancelled.");
+            }
         }
 
         private async UniTask ShowLoadingScreen() => await FadeLoadingScreen(1f);

@@ -13,7 +13,7 @@ namespace Editor.Tests
         
         public static GameItems GameItems() => Resources.Load<GameItems>("RuntimeAssets/GameItemCollection");
         
-        public static ConveyorTape Tape() => new GameObject().AddComponent<ConveyorTape>();
+        public static IConveyorTape Tape() => new GameObject().AddComponent<ConveyorTape>();
 
         public static ConveyorTapeItemDraggable ItemDraggable() => 
             new GameObject().AddComponent<ConveyorTapeItemDraggable>();

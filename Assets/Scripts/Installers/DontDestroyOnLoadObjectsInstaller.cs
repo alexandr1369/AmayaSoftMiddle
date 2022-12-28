@@ -8,7 +8,7 @@ namespace Installers
     {
         [field: SerializeField] private AudioService AudioServicePrefab { get; set; }
         
-        private AudioService _audioService;
+        private IAudioService _audioService;
         
         public override void InstallBindings()
         {
@@ -19,14 +19,14 @@ namespace Installers
 
         private void LoadData()
         {
-            _audioService = Container.InstantiatePrefabForComponent<AudioService>(AudioServicePrefab);
-            _audioService.transform.parent = null;
+            _audioService = Container.InstantiatePrefabForComponent<IAudioService>(AudioServicePrefab);
+            ((AudioService)_audioService).transform.parent = null;
         }
 
         private void BindAudioService()
         {
             Container.BindInterfacesAndSelfTo<AudioService>()
-                .FromComponentOn(_audioService.gameObject)
+                .FromComponentOn(((AudioService)_audioService).gameObject)
                 .AsSingle();
         }
 
@@ -34,7 +34,7 @@ namespace Installers
         {
             var objects = new List<GameObject>
             {
-                _audioService.gameObject
+                ((AudioService)_audioService).gameObject
             };
             
             objects.ForEach(DontDestroyOnLoad);

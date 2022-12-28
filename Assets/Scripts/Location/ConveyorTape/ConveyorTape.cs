@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 namespace Location.ConveyorTape
 {
-    public class ConveyorTape : MonoBehaviour
+    public class ConveyorTape : MonoBehaviour, IConveyorTape
     {
         [field: SerializeField] public ConveyorTapeConfig Config { get; private set; }
         
@@ -16,7 +16,7 @@ namespace Location.ConveyorTape
         
         private GameItems _gameItems;
         private WishesService _wishesService;
-        private Utils.IFactory<ConveyorTapeItem> _factory;
+        private Utils.IFactory<IConveyorTapeItem> _factory;
         private Vector3 _startPoint;
         private float _spawningDelay;
         private int _currentIncorrectAnswersInARow;
@@ -25,7 +25,7 @@ namespace Location.ConveyorTape
         private void Construct(
             GameItems gameItems,
             WishesService wishesService,
-            Utils.IFactory<ConveyorTapeItem> factory,
+            Utils.IFactory<IConveyorTapeItem> factory,
             HomeSceneLoadingContext context)
         {
             _gameItems = gameItems;
@@ -59,7 +59,7 @@ namespace Location.ConveyorTape
         private void SpawnItem()
         {
             var item = _factory.Create();
-            item.transform.position = _startPoint;
+            ((MonoBehaviour)item).transform.position = _startPoint;
             var letterItems = _gameItems.GetAssets<LetterItem>();
             var randomLetter = letterItems[Random.Range(0, letterItems.Count)];
             var isRightAnswer = _wishesService.IsRightAnswer(randomLetter);

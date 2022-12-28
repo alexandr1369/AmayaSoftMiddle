@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Utils.Assets
 {
-    public class RuntimeAssets<T> : ScriptableObject where T : Object
+    public abstract class RuntimeAssets<T> : ScriptableObject where T : Object
     {
         [field: SerializeField] protected List<RuntimeAsset<T>> Assets { get; set; }
 

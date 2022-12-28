@@ -3,6 +3,7 @@ using LoadingSystem.Loading.Operations.Home;
 using StateSystem;
 using StateSystem.UserState;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 using Random = UnityEngine.Random;
 
@@ -105,9 +106,22 @@ public class AudioService : MonoBehaviour, IAudioService
 
 public interface IAudioService
 {
+    AudioSource MusicAudioSource { get; }
+    AudioSource SoundAudioSource { get; }
+    AudioClip HomeMusic1Clip { get; }
+    AudioClip HomeMusic2Clip { get; }
+    AudioClip ClickClip { get; }
     AudioClip InteractionClip { get; }
+    IGameController GameController { get; }
+    IGameSettings GameSettings { get; }
     int PlayedLocalFxCount { get; }
+    bool IsMusicEnabled { get; }
+    bool IsSoundEnabled { get; }
+    void PlayHomeMusic();
     void PlayLocalFx(AudioSource source, AudioClip clip);
     void StopLocalFx(AudioSource source);
     void PlayGlobalFx(AudioClip clip);
+    void SetMusicVolume(bool state);
+    void SetSoundVolume(bool state);
+    void PreloadHomeAudio();
 }

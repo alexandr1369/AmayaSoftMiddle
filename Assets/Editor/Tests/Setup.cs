@@ -8,7 +8,7 @@ namespace Editor.Tests
 {
     public static class Setup
     {
-        public static ConveyorTapeItem TapeItem()
+        public static IConveyorTapeItem TapeItem()
         {
             var conveyorTapeItem = new GameObject().AddComponent<ConveyorTapeItem>();
             var config = Create.ConveyorTapeItemConfig();
@@ -40,7 +40,17 @@ namespace Editor.Tests
         public static IAudioService AudioServiceInterface()
         {
             var audioService = Substitute.For<IAudioService>();
+            var gameController = GameController();
+            var gameSettings = Substitute.For<IGameSettings>();
             var audioClip = Create.AudioClip();
+            var audioSource = Create.AudioSource();
+            audioService.GameController.Returns(gameController); 
+            audioService.GameSettings.Returns(gameSettings);
+            audioService.MusicAudioSource.Returns(audioSource);
+            audioService.SoundAudioSource.Returns(audioSource);
+            audioService.HomeMusic1Clip.Returns(audioClip);
+            audioService.HomeMusic2Clip.Returns(audioClip);
+            audioService.ClickClip.Returns(audioClip);
             audioService.InteractionClip.Returns(audioClip);
 
             return audioService;

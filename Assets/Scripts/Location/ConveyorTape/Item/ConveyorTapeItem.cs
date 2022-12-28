@@ -6,11 +6,12 @@ using GameItemSystem.DropGroup;
 using LoadingSystem.Loading.Operations.Home;
 using Location.ConveyorTape.Item.Movement;
 using UnityEngine;
+using Utils;
 using Zenject;
 
 namespace Location.ConveyorTape.Item
 {
-    public class ConveyorTapeItem : MonoBehaviour
+    public class ConveyorTapeItem : MonoBehaviour, IConveyorTapeItem
     {
         public event Action OnCollected;
         
@@ -105,5 +106,21 @@ namespace Location.ConveyorTape.Item
             OnCollected?.Invoke();
             OnCollected = null;
         }
+    }
+
+    public interface IConveyorTapeItem
+    {
+        event Action OnCollected;
+        ConveyorTapeItemConfig Config { get; }
+        SpriteRenderer SpriteRenderer { get; }
+        AudioSource AudioSource { get; }
+        LetterItem Item { get; }
+        bool IsBonus { get; }
+        void Init(LetterItem item);
+        void InitBonus(Sprite icon);
+        void SetMoveBehaviour(IConveyorTapeItemMovable moveBehaviour);
+        void PlayDraggingAnimation(bool state);
+        void PlayInteractionAnimation(Vector3 targetPosition);
+        void Collect();
     }
 }

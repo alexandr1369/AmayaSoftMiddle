@@ -10,12 +10,12 @@ namespace Editor
         [MenuItem("AmayaSoft/State/Remove Save File &R")]
         public static void RemoveSaveFile()
         {
-            var path = GameStateService.SaveFile;
+            var path = IGameStateService.SaveFile;
             
             if (File.Exists(path)) 
                 File.Delete(path);
 
-            path = GameStateService.BackupFile;
+            path = IGameStateService.BackupFile;
             
             if (File.Exists(path)) 
                 File.Delete(path);
